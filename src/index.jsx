@@ -1,11 +1,11 @@
 import { createRoot } from 'react-dom/client';
+import { MainView } from './components/main-view/main-view';
+
 import "./index.scss";
 
 const MyFlixApp = () => {
   return (
-    <div className="my-flix">
-      <div>Hello World</div>
-    </div>
+    <MainView />
   );
 };
 
