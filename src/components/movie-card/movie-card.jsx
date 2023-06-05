@@ -1,9 +1,7 @@
 export const MovieCard = ({ movieData, onMovieClick }) => {
-    return (
+  return (
     <div onClick={() => onMovieClick(movieData)}>
-      <div>
-        {/* <img src={movieData.image} /> */}
-      </div>
+      <div>{/* <img src={movieData.image} /> */}</div>
       <div>
         <span>Title: </span>
         <span>{movieData.title}</span>
@@ -13,5 +11,5 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
         <span>{movieData.directors[0].name}</span>
       </div>
     </div>
-    );
+  );
 };
