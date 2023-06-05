@@ -10,7 +10,8 @@ export const MainView = () => {
       summary:
         "After rescuing Han Solo from Jabba the Hutt, the Rebels attempt to destroy the second Death Star, while Luke struggles to help Darth Vader back from the dark side.",
       featured: false,
-      imageURL: "starwarsepisodeVI.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_QL75_UX100_CR0,4,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff623",
@@ -34,7 +35,8 @@ export const MainView = () => {
       summary:
         "After uncovering a mysterious artifact buried beneath the Lunar surface, a spacecraft is sent to Jupiter to find its origins - a spacecraft manned by two men and the supercomputer H.A.L. 9000.",
       featured: true,
-      imageURL: "2001aspaceodyssey.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BMmNlYzRiNDctZWNhMi00MzI4LThkZTctMTUzMmZkMmFmNThmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UX100_CR0,0,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff625",
@@ -60,7 +62,8 @@ export const MainView = () => {
       summary:
         "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
       featured: false,
-      imageURL: "starwarsepisodeIV.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BOTA5NjhiOTAtZWM0ZC00MWNhLThiMzEtZDFkOTk2OTU1ZDJkXkEyXkFqcGdeQXVyMTA4NDI1NTQx._V1_QL75_UX100_CR0,3,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff627",
@@ -84,7 +87,8 @@ export const MainView = () => {
       summary:
         "A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence, while his psychic son sees horrific forebodings from both past and future.",
       featured: false,
-      imageURL: "theshining.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BZWFlYmY2MGEtZjVkYS00YzU4LTg0YjQtYzY1ZGE3NTA5NGQxXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_QL75_UX100_CR0,2,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff629",
@@ -110,7 +114,8 @@ export const MainView = () => {
       summary:
         "A mentally unstable veteran works as a nighttime taxi driver in New York City, where the perceived decadence and sleaze fuels his urge for violent action.",
       featured: false,
-      imageURL: "taxidriver.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BM2M1MmVhNDgtNmI0YS00ZDNmLTkyNjctNTJiYTQ2N2NmYzc2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UX100_CR0,2,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff62b",
@@ -135,7 +140,7 @@ export const MainView = () => {
       summary:
         "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
       featured: false,
-      imageURL: "silenceofthelambs.png",
+      imageURL: "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_QL75_UY148_CR0,0,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff62d",
@@ -161,7 +166,8 @@ export const MainView = () => {
       summary:
         "In the future, a sadistic gang leader is imprisoned and volunteers for a conduct-aversion experiment, but it doesn't go as planned.",
       featured: false,
-      imageURL: "aclockworkorange.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BMTY3MjM1Mzc4N15BMl5BanBnXkFtZTgwODM0NzAxMDE@._V1_QL75_UX100_CR0,0,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff62f",
@@ -188,7 +194,8 @@ export const MainView = () => {
       summary:
         "An insane American general orders a bombing attack on the Soviet Union, triggering a path to nuclear holocaust that a war room full of politicians and generals frantically tries to stop.",
       featured: false,
-      imageURL: "drstrangelove.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BMWMxYjZkOWUtM2FjMi00MmI1LThkNzQtNTM5Y2E2ZGQ2NGFhXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_QL75_UX100_CR0,1,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff631",
@@ -214,7 +221,8 @@ export const MainView = () => {
       summary:
         "After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.",
       featured: false,
-      imageURL: "starwarsepisodeV.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UX100_CR0,4,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff633",
@@ -238,7 +246,8 @@ export const MainView = () => {
       summary:
         "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.",
       featured: false,
-      imageURL: "thedeparted.png",
+      imageURL:
+        "https://m.media-amazon.com/images/M/MV5BMTI1MTY2OTIxNV5BMl5BanBnXkFtZTYwNjQ4NjY3._V1_QL75_UY148_CR0,0,100,148_.jpg",
       genres: [
         {
           _id: "6479e42401e17698c2cff635",
