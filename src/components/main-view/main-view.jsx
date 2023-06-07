@@ -26,7 +26,7 @@ export const MainView = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  
+
   if (movies.length === 0) {
     return <div>No movies</div>;
   }
