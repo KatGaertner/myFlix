@@ -12,14 +12,11 @@ export const LoginView = ({ onLoggedIn }) => {
       password: password,
     };
 
-    fetch(
-      `http://127.0.0.1:8080/login?Username=${data.name}&Password=${data.password}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }
-    )
+    fetch("http://127.0.0.1:8080/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.userData) {
