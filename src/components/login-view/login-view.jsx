@@ -22,7 +22,6 @@ export const LoginView = ({ onLoggedIn }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("Login response:", data);
         if (data.userData) {
           onLoggedIn(data.userData, data.token);
         } else {
@@ -30,7 +29,6 @@ export const LoginView = ({ onLoggedIn }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         alert("Something went wrong.");
       });
   };
