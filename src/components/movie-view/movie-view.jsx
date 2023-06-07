@@ -27,17 +27,13 @@ export const MovieView = ({ movieData, onBackClick }) => {
 
 MovieView.propTypes = {
   movieData: propTypes.shape({
-    id: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     summary: propTypes.string,
     directors: propTypes.arrayOf(propTypes.shape({
-      name: propTypes.string.isRequired,
-      description: propTypes.string
+      name: propTypes.string.isRequired
     })).isRequired,
-    featured: propTypes.bool,
     genres: propTypes.arrayOf(propTypes.shape({
-      name: propTypes.string.isRequired,
-      description: propTypes.string
+      name: propTypes.string.isRequired
     })).isRequired,
     imageURL: propTypes.string.isRequired,
   }).isRequired,
