@@ -43,5 +43,5 @@ MovieView.propTypes = {
     ).isRequired,
     imageURL: propTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: propTypes.func.isRequired,
+  onBackClick: propTypes.func.isRequired,
 };
