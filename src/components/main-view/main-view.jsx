@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
+  const [user, setUser] = useState(null);
   const [movies, setMovies] = useState([]);
-
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
@@ -26,6 +27,10 @@ export const MainView = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  if (!user) {
+    return <LoginView onLoggedIn={(user) => setUser(user)} />;
+  }
 
   if (movies.length === 0) {
     return <div>No movies</div>;
@@ -65,18 +70,21 @@ export const MainView = () => {
   }
 
   return (
-    <div className="main">
-      {movies.map((movie) => {
-        return (
-          <MovieCard
-            key={movie.id}
-            movieData={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        );
-      })}
-    </div>
+    <>
+      <div>
+        {movies.map((movie) => {
+          return (
+            <MovieCard
+              key={movie.id}
+              movieData={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          );
+        })}
+      </div>
+      <button onClick={() => setUser(null)}>Logout</button>
+    </>
   );
 };
