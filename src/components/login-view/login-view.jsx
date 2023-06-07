@@ -24,7 +24,7 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((data) => {
         console.log("Login response:", data);
         if (data.userData) {
-          onLoggedIn(data.userData);
+          onLoggedIn(data.userData, data.token);
         } else {
           alert(data.info.message);
         }

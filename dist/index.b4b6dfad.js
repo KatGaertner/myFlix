@@ -27310,10 +27310,17 @@ var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
     const [user, setUser] = (0, _react.useState)(null);
+    const [token, setToken] = (0, _react.useState)(null);
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        fetch("http://127.0.0.1:8080/movies").then((response)=>response.json()).then((data)=>{
+        // only fetch list when token is there
+        if (!token) return;
+        fetch("http://127.0.0.1:8080/movies", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((data)=>{
             const moviesFromAPI = data.map((movie)=>{
                 return {
                     id: movie._id,
@@ -27327,19 +27334,24 @@ const MainView = ()=>{
             });
             setMovies(moviesFromAPI);
         }).catch((error)=>console.log(error));
-    }, []);
+    }, [
+        token
+    ]); // dependency array, ensures fetch is called when token changes
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-        onLoggedIn: (user)=>setUser(user)
+        onLoggedIn: (user, token)=>{
+            setUser(user);
+            setToken(token);
+        }
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 32,
-        columnNumber: 12
+        lineNumber: 41,
+        columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "No movies"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 36,
+        lineNumber: 51,
         columnNumber: 12
     }, undefined);
     if (selectedMovie) {
@@ -27354,12 +27366,12 @@ const MainView = ()=>{
                     onBackClick: ()=>setSelectedMovie(null)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 49,
+                    lineNumber: 64,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 53,
+                    lineNumber: 68,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27368,7 +27380,7 @@ const MainView = ()=>{
                             children: "Similar movies:"
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 55,
+                            lineNumber: 70,
                             columnNumber: 11
                         }, undefined),
                         similarMovies.map((movie)=>{
@@ -27379,14 +27391,14 @@ const MainView = ()=>{
                                 }
                             }, movie.id, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 58,
+                                lineNumber: 73,
                                 columnNumber: 15
                             }, undefined);
                         })
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 54,
+                    lineNumber: 69,
                     columnNumber: 9
                 }, undefined)
             ]
@@ -27403,27 +27415,30 @@ const MainView = ()=>{
                         }
                     }, movie.id, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 77,
+                        lineNumber: 92,
                         columnNumber: 13
                     }, undefined);
                 })
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 74,
+                lineNumber: 89,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: ()=>setUser(null),
+                onClick: ()=>{
+                    setUser(null);
+                    setToken(null);
+                },
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 87,
+                lineNumber: 102,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(MainView, "sVgykBIV/1Bi0uv+6wh4yv/6H2Y=");
+_s(MainView, "qXlxSr1HRHFcq0wZllxU017V8qo=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28488,7 +28503,7 @@ const LoginView = ({ onLoggedIn  })=>{
             body: JSON.stringify(data)
         }).then((response)=>response.json()).then((data)=>{
             console.log("Login response:", data);
-            if (data.userData) onLoggedIn(data.userData);
+            if (data.userData) onLoggedIn(data.userData, data.token);
             else alert(data.info.message);
         }).catch((error)=>{
             console.log(error);

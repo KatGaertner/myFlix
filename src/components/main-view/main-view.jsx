@@ -5,11 +5,19 @@ import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/movies")
+    // only fetch list when token is there
+    if (!token) {
+      return;
+    }
+
+    fetch("http://127.0.0.1:8080/movies", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((response) => response.json())
       .then((data) => {
         const moviesFromAPI = data.map((movie) => {
@@ -26,10 +34,17 @@ export const MainView = () => {
         setMovies(moviesFromAPI);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [token]); // dependency array, ensures fetch is called when token changes
 
   if (!user) {
-    return <LoginView onLoggedIn={(user) => setUser(user)} />;
+    return (
+      <LoginView
+        onLoggedIn={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+      />
+    );
   }
 
   if (movies.length === 0) {
@@ -84,7 +99,14 @@ export const MainView = () => {
           );
         })}
       </div>
-      <button onClick={() => setUser(null)}>Logout</button>
+      <button
+        onClick={() => {
+          setUser(null);
+          setToken(null);
+        }}
+      >
+        Logout
+      </button>
     </>
   );
 };
