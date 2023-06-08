@@ -16,28 +16,30 @@ export const SignupView = () => {
       birthday: birthday,
     };
 
-    fetch(`http://127.0.0.1:8080/users`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Successfully signed up!");
-        } else {
-          let contentType = response.headers.get("content-type");
-          if (contentType.includes("text/html")) {
-            response.text().then((info) => alert(info));
-          } else if (contentType.includes("application/json")) {
-            response.json().then((info) => {
-              alert(info.errors.map((e) => e.msg).join("\n"));
-            });
-          }
-        }
+    if (event.target.reportValidity()) {
+      fetch(`http://127.0.0.1:8080/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            alert("Successfully signed up!");
+          } else {
+            let contentType = response.headers.get("content-type");
+            if (contentType.includes("text/html")) {
+              response.text().then((info) => alert(info));
+            } else if (contentType.includes("application/json")) {
+              response.json().then((info) => {
+                alert(info.errors.map((e) => e.msg).join("\n"));
+              });
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -51,6 +53,16 @@ export const SignupView = () => {
           onChange={(e) => setUsername(e.target.value)}
           required
           minLength={5}
+          pattern="^[a-zA-Z0-9]*$"
+          onInvalid={(e) => {
+            if (e.target.validity.patternMismatch) {
+              e.target.setCustomValidity(
+                "Username can only use alphanumeric characters."
+              );
+            } else {
+              e.target.setCustomValidity("");
+            }
+          }}
         />
       </label>
       <label htmlFor="email">
