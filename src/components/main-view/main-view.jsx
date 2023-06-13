@@ -13,7 +13,6 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  // const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     // only fetch list when token is there
@@ -41,98 +40,6 @@ export const MainView = () => {
       })
       .catch((error) => console.log(error));
   }, [token]); // dependency array, ensures fetch is called when token changes
-
-  const renderView = () => {
-    if (!user) {
-      return (
-        <Col lg={7} xl={5}>
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
-          />
-
-          <br />
-          <SignupView />
-        </Col>
-      );
-    }
-
-    if (movies.length === 0) {
-      return (
-        <Col className="justify-content-center rounded-4 bg-body">
-          No movies
-        </Col>
-      );
-    }
-
-    if (selectedMovie) {
-      let genre = selectedMovie.genres[0].name;
-      let similarMovies = movies
-        .filter((movie) => {
-          return movie.genres.some((el) => el.name.includes(genre));
-        })
-        .filter((movie) => movie.title !== selectedMovie.title);
-
-      return (
-        <Col md={8}>
-          <MovieView
-            movieData={selectedMovie}
-            onBackClick={() => setSelectedMovie(null)}
-          />
-          <hr />
-          <Row>
-            <p>Similar movies:</p>
-            <div class="grid-container">
-              {similarMovies.map((movie) => {
-                return (
-                  <div class="mb-3" key={movie.id}>
-                    <MovieCard
-                      movieData={movie}
-                      onMovieClick={(newSelectedMovie) => {
-                        setSelectedMovie(newSelectedMovie);
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </Row>
-        </Col>
-      );
-    }
-
-    return (
-      <Col md={10}>
-        <div class="grid-container">
-          {movies.map((movie) => {
-            return (
-              <div class="mb-3" key={movie.id}>
-                <MovieCard
-                  movieData={movie}
-                  onMovieClick={(newSelectedMovie) => {
-                    setSelectedMovie(newSelectedMovie);
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        <Button
-          className="btn-secondary"
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          }}
-        >
-          Logout
-        </Button>
-      </Col>
-    );
-  };
 
   return (
     <BrowserRouter>
