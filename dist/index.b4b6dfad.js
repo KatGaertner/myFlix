@@ -27440,10 +27440,10 @@ const MainView = ()=>{
                                     md: 10,
                                     className: "bg-body rounded-4",
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                        class: "grid-container",
+                                        className: "grid-container",
                                         children: movies.map((movie)=>{
                                             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                                class: "mb-3",
+                                                className: "mb-3",
                                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                                                     movieData: movie
                                                 }, void 0, false, void 0, void 0)
@@ -27568,7 +27568,7 @@ const MovieCard = ({ movieData  })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        class: "text-end",
+                        className: "text-end",
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                             to: `/movies/${movieData.id}`,
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -46497,7 +46497,7 @@ const MovieView = ({ movies  })=>{
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                        class: "text-end",
+                                        className: "text-end",
                                         children: movieData.genres[0].name
                                     }, void 0, false, {
                                         fileName: "src/components/movie-view/movie-view.jsx",
@@ -46559,10 +46559,10 @@ const MovieView = ({ movies  })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        class: "grid-container",
+                        className: "grid-container",
                         children: similarMovies.map((movie)=>{
                             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                class: "mb-3",
+                                className: "mb-3",
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                                     movieData: movie,
                                     onMovieClick: (newSelectedMovie)=>{

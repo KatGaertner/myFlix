@@ -25,7 +25,7 @@ export const MovieView = ({ movies }) => {
             <h1>{movieData.title}</h1>
             <h2>{movieData.directors[0].name}</h2>
             <div>{movieData.summary}</div>
-            <div class="text-end">{movieData.genres[0].name}</div>
+            <div className="text-end">{movieData.genres[0].name}</div>
           </div>
           <div>
             <Link to={"/"}>
@@ -39,10 +39,10 @@ export const MovieView = ({ movies }) => {
       <hr />
       <Row>
         <p>Similar movies:</p>
-        <div class="grid-container">
+        <div className="grid-container">
           {similarMovies.map((movie) => {
             return (
-              <div class="mb-3" key={movie.id}>
+              <div className="mb-3" key={movie.id}>
                 <MovieCard
                   movieData={movie}
                   onMovieClick={(newSelectedMovie) => {

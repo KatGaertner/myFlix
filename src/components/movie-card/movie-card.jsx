@@ -11,7 +11,7 @@ export const MovieCard = ({ movieData }) => {
           <Card.Title>{movieData.title}</Card.Title>
           <Card.Text>{movieData.directors[0].name}</Card.Text>
         </div>
-        <div class="text-end">
+        <div className="text-end">
           <Link to={`/movies/${movieData.id}`}>
             <Button variant="link">See more</Button>
           </Link>

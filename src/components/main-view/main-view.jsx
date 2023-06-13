@@ -116,10 +116,10 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <Col md={10} className="bg-body rounded-4">
-                    <div class="grid-container">
+                    <div className="grid-container">
                       {movies.map((movie) => {
                         return (
-                          <div class="mb-3" key={movie.id}>
+                          <div className="mb-3" key={movie.id}>
                             <MovieCard movieData={movie} />
                           </div>
                         );
