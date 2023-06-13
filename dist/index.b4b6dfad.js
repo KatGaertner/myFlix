@@ -46592,29 +46592,26 @@ const MovieView = ({ movies  })=>{
             }, undefined)
         ]
     }, void 0, true);
-}; // MovieView.propTypes = {
- //   movieData: propTypes.shape({
- //     title: propTypes.string.isRequired,
- //     summary: propTypes.string,
- //     directors: propTypes.arrayOf(
- //       propTypes.shape({
- //         name: propTypes.string.isRequired,
- //       })
- //     ).isRequired,
- //     genres: propTypes.arrayOf(
- //       propTypes.shape({
- //         name: propTypes.string.isRequired,
- //       })
- //     ).isRequired,
- //     imageURL: propTypes.string.isRequired,
- //   }).isRequired,
- // };
+};
 _s(MovieView, "O3vF2RkakSsZj0hXldFkJXZ8hQI=", false, function() {
     return [
         (0, _reactRouterDom.useParams)
     ];
 });
 _c = MovieView;
+MovieView.propTypes = {
+    movies: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        summary: (0, _propTypesDefault.default).string,
+        directors: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired
+        })).isRequired,
+        genres: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired
+        })).isRequired,
+        imageURL: (0, _propTypesDefault.default).string.isRequired
+    })).isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieView");
 

@@ -58,20 +58,22 @@ export const MovieView = ({ movies }) => {
   );
 };
 
-// MovieView.propTypes = {
-//   movieData: propTypes.shape({
-//     title: propTypes.string.isRequired,
-//     summary: propTypes.string,
-//     directors: propTypes.arrayOf(
-//       propTypes.shape({
-//         name: propTypes.string.isRequired,
-//       })
-//     ).isRequired,
-//     genres: propTypes.arrayOf(
-//       propTypes.shape({
-//         name: propTypes.string.isRequired,
-//       })
-//     ).isRequired,
-//     imageURL: propTypes.string.isRequired,
-//   }).isRequired,
-// };
+MovieView.propTypes = {
+  movies: propTypes.arrayOf(
+    propTypes.shape({
+      title: propTypes.string.isRequired,
+      summary: propTypes.string,
+      directors: propTypes.arrayOf(
+        propTypes.shape({
+          name: propTypes.string.isRequired,
+        })
+      ).isRequired,
+      genres: propTypes.arrayOf(
+        propTypes.shape({
+          name: propTypes.string.isRequired,
+        })
+      ).isRequired,
+      imageURL: propTypes.string.isRequired,
+    })
+  ).isRequired,
+};
