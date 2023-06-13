@@ -27523,7 +27523,7 @@ const MainView = ()=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-                className: "justify-content-md-center w-100",
+                className: "justify-content-md-center g-0",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -47267,9 +47267,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 const NavigationBar = ({ user , onLoggedOut  })=>{
-    console.log(user);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar), {
-        fluid: true,
         bg: "primary",
         expand: "sm",
         sticky: "top",
@@ -47287,7 +47285,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                         height: "24px"
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 16,
+                        lineNumber: 13,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -47297,20 +47295,20 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                         children: "myFlix"
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 22,
+                        lineNumber: 19,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 15,
+                lineNumber: 12,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
                 "aria-controls": "navbar"
             }, void 0, false, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 24,
+                lineNumber: 21,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -47325,7 +47323,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Log in"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 29,
+                                lineNumber: 26,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -47334,7 +47332,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Sign up"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 32,
+                                lineNumber: 29,
                                 columnNumber: 15
                             }, undefined)
                         ]
@@ -47346,7 +47344,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Home"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 38,
+                                lineNumber: 35,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -47359,30 +47357,30 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                     children: "Logout"
                                 }, void 0, false, {
                                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 45,
+                                    lineNumber: 42,
                                     columnNumber: 17
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 41,
+                                lineNumber: 38,
                                 columnNumber: 15
                             }, undefined)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 26,
+                    lineNumber: 23,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 25,
+                lineNumber: 22,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-        lineNumber: 8,
+        lineNumber: 6,
         columnNumber: 5
     }, undefined);
 };

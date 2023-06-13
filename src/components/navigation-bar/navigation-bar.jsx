@@ -2,11 +2,8 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
-  console.log(user);
-
   return (
     <Navbar
-      fluid
       bg="primary"
       expand="sm"
       sticky="top"
