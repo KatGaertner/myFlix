@@ -13225,4 +13225,9 @@ h1, .h1, h2, .h2, h3, .h3 {
   display: block;
 }
 
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */

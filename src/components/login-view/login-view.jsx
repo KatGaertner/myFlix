@@ -64,7 +64,7 @@ export const LoginView = ({ onLoggedIn }) => {
           defaultChecked={true}
         />
         <Button className="mb-3 w-100" type="submit">
-          Login
+          Log in
         </Button>
       </Form>
       <div class="d-flex justify-content-between rounded-4 bg-body">

@@ -3,6 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { Col, Row, Button } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -135,7 +136,15 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <Row className="justify-content-md-center">
+      <NavigationBar
+        user={user ? true : false}
+        onLoggedOut={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      />
+      <Row className="justify-content-md-center w-100">
         <Routes>
           <Route
             path="/signup"
@@ -181,7 +190,7 @@ export const MainView = () => {
                     No movies
                   </Col>
                 ) : (
-                  <Col md={8}>
+                  <Col md={8} className="bg-body rounded-4">
                     <MovieView movies={movies} />
                   </Col>
                 )}
@@ -199,7 +208,7 @@ export const MainView = () => {
                     No movies
                   </Col>
                 ) : (
-                  <Col md={10}>
+                  <Col md={10} className="bg-body rounded-4">
                     <div class="grid-container">
                       {movies.map((movie) => {
                         return (
@@ -209,17 +218,6 @@ export const MainView = () => {
                         );
                       })}
                     </div>
-
-                    <Button
-                      className="btn-secondary"
-                      onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                      }}
-                    >
-                      Logout
-                    </Button>
                   </Col>
                 )}
               </>
