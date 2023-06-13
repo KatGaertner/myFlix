@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Col, Row, Button } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -11,7 +12,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  // const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     // only fetch list when token is there
@@ -50,11 +51,7 @@ export const MainView = () => {
               setToken(token);
             }}
           />
-          <div class="d-flex justify-content-between rounded-4 bg-body">
-            <hr class="flex-grow-1" />
-            <span class="mx-3"> or </span>
-            <hr class="flex-grow-1" />
-          </div>
+
           <br />
           <SignupView />
         </Col>
@@ -136,5 +133,100 @@ export const MainView = () => {
     );
   };
 
-  return <Row className="justify-content-md-center">{renderView()}</Row>;
+  return (
+    <BrowserRouter>
+      <Row className="justify-content-md-center">
+        <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col lg={7} xl={5}>
+                    <SignupView />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col lg={7} xl={5}>
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/movies/:movieID"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col className="justify-content-center rounded-4 bg-body">
+                    No movies
+                  </Col>
+                ) : (
+                  <Col md={8}>
+                    <MovieView movies={movies} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col className="justify-content-center rounded-4 bg-body">
+                    No movies
+                  </Col>
+                ) : (
+                  <Col md={10}>
+                    <div class="grid-container">
+                      {movies.map((movie) => {
+                        return (
+                          <div class="mb-3" key={movie.id}>
+                            <MovieCard movieData={movie} />
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <Button
+                      className="btn-secondary"
+                      onClick={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </Col>
+                )}
+              </>
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
+  );
 };
