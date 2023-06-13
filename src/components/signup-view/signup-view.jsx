@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Col, Button, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -141,6 +142,14 @@ export const SignupView = () => {
           Submit
         </Button>
       </Form>
+      <div className="d-flex justify-content-between rounded-4 bg-body">
+        <hr className="flex-grow-1" />
+        <span className="mx-3"> or </span>
+        <hr className="flex-grow-1" />
+      </div>
+      <Link to="/login">
+        <Button className="btn-secondary w-100 mt-3">Log in</Button>
+      </Link>
     </div>
   );
 };

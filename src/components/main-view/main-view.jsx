@@ -51,7 +51,7 @@ export const MainView = () => {
           localStorage.clear();
         }}
       />
-      <Row className="justify-content-md-center g-0">
+      <Row className="justify-content-center g-0">
         <Routes>
           <Route
             path="/signup"
@@ -60,7 +60,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col lg={7} xl={5}>
+                  <Col sm={10} md={8} lg={6}>
                     <SignupView />
                   </Col>
                 )}
@@ -74,7 +74,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col lg={7} xl={5}>
+                  <Col sm={8} md={6} lg={4}>
                     <LoginView
                       onLoggedIn={(user, token) => {
                         setUser(user);
