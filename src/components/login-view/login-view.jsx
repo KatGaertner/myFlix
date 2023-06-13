@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button, Form, Col, Row, ModalTitle } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -33,28 +34,38 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">
-        Username:
-        <input
+    <div class="p-4 rounded-4 bg-body">
+      <h1 class="text-center">Log in</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Control
+          className="mb-2"
           type="text"
           id="username"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-      </label>
-      <label htmlFor="password">
-        Password:
-        <input
+        <Form.Control
+          className="mb-2"
           type="password"
           id="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+        <Form.Check
+          className="mb-2 mx-1"
+          type="checkbox"
+          id="keepLogInCheck"
+          label="Keep me logged in"
+          defaultChecked={true}
+        />
+        <Button className="mb-3 w-100" type="submit">
+          Login
+        </Button>
+      </Form>
+    </div>
   );
 };
