@@ -46662,10 +46662,10 @@ const LoginView = ({ onLoggedIn  })=>{
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        class: "p-4 rounded-4 bg-body",
+        className: "p-4 rounded-4 bg-body",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                class: "text-center",
+                className: "text-center",
                 children: "Log in"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
@@ -46728,17 +46728,17 @@ const LoginView = ({ onLoggedIn  })=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                class: "d-flex justify-content-between rounded-4 bg-body",
+                className: "d-flex justify-content-between rounded-4 bg-body",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {
-                        class: "flex-grow-1"
+                        className: "flex-grow-1"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 71,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        class: "mx-3",
+                        className: "mx-3",
                         children: " or "
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
@@ -46746,7 +46746,7 @@ const LoginView = ({ onLoggedIn  })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {
-                        class: "flex-grow-1"
+                        className: "flex-grow-1"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 73,
@@ -46841,10 +46841,10 @@ const SignupView = ()=>{
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        class: "p-4 rounded-4 bg-body",
+        className: "p-4 rounded-4 bg-body",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                class: "text-center",
+                className: "text-center",
                 children: "Sign up"
             }, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",

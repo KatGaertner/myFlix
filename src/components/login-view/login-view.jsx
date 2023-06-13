@@ -35,8 +35,8 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <div class="p-4 rounded-4 bg-body">
-      <h1 class="text-center">Log in</h1>
+    <div className="p-4 rounded-4 bg-body">
+      <h1 className="text-center">Log in</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Control
           className="mb-2"
@@ -67,10 +67,10 @@ export const LoginView = ({ onLoggedIn }) => {
           Log in
         </Button>
       </Form>
-      <div class="d-flex justify-content-between rounded-4 bg-body">
-        <hr class="flex-grow-1" />
-        <span class="mx-3"> or </span>
-        <hr class="flex-grow-1" />
+      <div className="d-flex justify-content-between rounded-4 bg-body">
+        <hr className="flex-grow-1" />
+        <span className="mx-3"> or </span>
+        <hr className="flex-grow-1" />
       </div>
       <Link to="/signup">
         <Button className="btn-secondary w-100 mt-3">Sign up</Button>
