@@ -35,6 +35,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
+              <Nav.Link as={Link} to="/profile">
+                Profile
+              </Nav.Link>
               <Button
                 className="btn-secondary mx-3 ms-auto"
                 onClick={onLoggedOut}
