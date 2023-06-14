@@ -112,8 +112,8 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col className="justify-content-center rounded-4 bg-body">
-                    No movies
+                  <Col className="d-flex justify-content-center rounded-4 bg-body">
+                    <div>No movies found</div>
                   </Col>
                 ) : (
                   <Col md={10} className="bg-body rounded-4">

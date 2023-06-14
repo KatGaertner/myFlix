@@ -27437,8 +27437,10 @@ const MainView = ()=>{
                                     to: "/login",
                                     replace: true
                                 }, void 0, false, void 0, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                                    className: "justify-content-center rounded-4 bg-body",
-                                    children: "No movies"
+                                    className: "d-flex justify-content-center rounded-4 bg-body",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: "No movies found"
+                                    }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                     md: 10,
                                     className: "bg-body rounded-4",
@@ -47183,10 +47185,10 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                 className: "mx-3 icon-link",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                        src: require("7245d4770c7d9bff"),
+                        src: require("84b14db05b2fe293"),
                         alt: "Logo",
-                        width: "24px",
-                        height: "24px"
+                        width: "32px",
+                        height: "32px"
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
                         lineNumber: 13,
@@ -47199,7 +47201,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                         children: "myFlix"
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 19,
+                        lineNumber: 20,
                         columnNumber: 9
                     }, undefined)
                 ]
@@ -47212,7 +47214,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                 "aria-controls": "navbar"
             }, void 0, false, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 21,
+                lineNumber: 22,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -47227,7 +47229,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Log in"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 26,
+                                lineNumber: 27,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -47236,7 +47238,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Sign up"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 29,
+                                lineNumber: 30,
                                 columnNumber: 15
                             }, undefined)
                         ]
@@ -47248,7 +47250,7 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Home"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 35,
+                                lineNumber: 36,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -47257,11 +47259,12 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                 children: "Profile"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 38,
+                                lineNumber: 39,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                className: "btn-secondary mx-3 ms-auto",
+                                variant: "outline-dark",
+                                className: "btn mx-3 ms-auto",
                                 onClick: onLoggedOut,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                     style: {
@@ -47270,24 +47273,24 @@ const NavigationBar = ({ user , onLoggedOut  })=>{
                                     children: "Logout"
                                 }, void 0, false, {
                                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 45,
+                                    lineNumber: 47,
                                     columnNumber: 17
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 41,
+                                lineNumber: 42,
                                 columnNumber: 15
                             }, undefined)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 23,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 22,
+                lineNumber: 23,
                 columnNumber: 7
             }, undefined)
         ]
@@ -47306,10 +47309,10 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM","7245d4770c7d9bff":"1TNcV"}],"1TNcV":[function(require,module,exports) {
-module.exports = require("37d3814adf590d4c").getBundleURL("byUka") + "tv.b91e9fea.svg" + "?" + Date.now();
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM","84b14db05b2fe293":"99SFT"}],"99SFT":[function(require,module,exports) {
+module.exports = require("216acaa1b07ecb89").getBundleURL("byUka") + "logo.1becbb9e.svg" + "?" + Date.now();
 
-},{"37d3814adf590d4c":"hDO1d"}],"hDO1d":[function(require,module,exports) {
+},{"216acaa1b07ecb89":"hDO1d"}],"hDO1d":[function(require,module,exports) {
 "use strict";
 var bundleURL = {};
 function getBundleURLCached(id) {

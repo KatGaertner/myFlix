@@ -11,11 +11,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
     >
       <Navbar.Brand as={Link} to="/" className="mx-3 icon-link">
         <img
-          src={require("./tv.svg")}
+          src={require("./logo.svg")}
           alt="Logo"
-          width={"24px"}
-          height={"24px"}
+          width={"32px"}
+          height={"32px"}
         />
+
         <span style={{ fontFamily: "'Comfortaa', cursive" }}>myFlix</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar" />
@@ -39,7 +40,8 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 Profile
               </Nav.Link>
               <Button
-                className="btn-secondary mx-3 ms-auto"
+                variant="outline-dark"
+                className="btn mx-3 ms-auto"
                 onClick={onLoggedOut}
               >
                 <span style={{ fontFamily: "'Comfortaa', cursive" }}>
