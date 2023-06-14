@@ -1,6 +1,7 @@
 import propTypes from "prop-types";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FavButton } from "../fav-button/fav-button";
 
 export const MovieCard = ({ movieData }) => {
   return (
@@ -11,7 +12,8 @@ export const MovieCard = ({ movieData }) => {
           <Card.Title>{movieData.title}</Card.Title>
           <Card.Text>{movieData.directors[0].name}</Card.Text>
         </div>
-        <div className="text-end">
+        <div className="d-flex flex-row justify-content-between">
+          <FavButton movieID={movieData.id} />
           <Link to={`/movies/${movieData.id}`}>
             <Button variant="link">See more</Button>
           </Link>
