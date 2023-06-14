@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PasswordField } from "../password-field/password-field";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -122,7 +123,14 @@ export const SignupView = () => {
             Password:*
           </Form.Label>
           <Col sm={rightColumnWidth}>
-            <Form.Control
+            <PasswordField
+              fieldID={"password"}
+              fieldValue={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required={true}
+              ariaDescribedby={"passwordText"}
+            />
+            {/* <Form.Control
               type="password"
               id="password"
               aria-describedby="passwordText"
@@ -130,7 +138,7 @@ export const SignupView = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={8}
-            />
+            /> */}
           </Col>
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
             <Form.Text id="passwordText">

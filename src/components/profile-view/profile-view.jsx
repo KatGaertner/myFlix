@@ -1,8 +1,9 @@
 import propTypes from "prop-types";
-import { Col, Row, Button, Form } from "react-bootstrap";
+import { Col, Row, Button, Form, InputGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { useEffect, useState } from "react";
+import { PasswordField } from "../password-field/password-field";
 
 export const ProfileView = ({ movies }) => {
   const [newUsername, setNewUsername] = useState("");
@@ -209,13 +210,10 @@ export const ProfileView = ({ movies }) => {
                 Password:
               </Form.Label>
               <Col sm={rightColumnWidth}>
-                <Form.Control
-                  type="password"
-                  id="newPassword"
-                  value={newPassword}
+                <PasswordField
+                  fieldID={"newPassword"}
+                  fieldValue={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                  minLength={8}
                 />
               </Col>
             </Form.Group>

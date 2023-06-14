@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Col, Row, ModalTitle } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PasswordField } from "../password-field/password-field";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -47,15 +48,22 @@ export const LoginView = ({ onLoggedIn }) => {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <Form.Control
-          className="mb-2"
+        <PasswordField
+          className={"mb-2"}
+          fieldID={"newPassword"}
+          fieldPlaceholder={"Password"}
+          fieldValue={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required={true}
+        />
+        {/* <Form.Control
           type="password"
           id="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+        /> */}
         <Form.Check
           className="mb-2 mx-1"
           type="checkbox"
