@@ -2,10 +2,29 @@ import propTypes from "prop-types";
 import { Col, Row, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export const MovieView = ({ movies }) => {
+  const [isFavorited, setFavorited] = useState(false);
+
+  const history = useNavigate();
+
   const { movieID } = useParams();
   const movieData = movies.find((movie) => movie.id === movieID);
+
+  useEffect(() => {
+    userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData.favorites.includes(movieData.id)) {
+      setFavorited(true);
+    }
+  }, []);
+
+  const toggleFavorited = () => {
+    setFavorited(!isFavorited);
+    // add API here
+    // save returned list to storage!
+  };
 
   let genre = movieData.genres[0].name;
   let similarMovies = movies
@@ -26,13 +45,15 @@ export const MovieView = ({ movies }) => {
             <h2>{movieData.directors[0].name}</h2>
             <div>{movieData.summary}</div>
             <div className="text-end">{movieData.genres[0].name}</div>
+            <Button onClick={() => toggleFavorited()}>
+              {!isFavorited && "Add to favorites"}
+              {isFavorited && "Remove from favorites"}
+            </Button>
           </div>
           <div>
-            <Link to={"/"}>
-              <Button className="mb-3" type="link">
-                Go back
-              </Button>
-            </Link>
+            <Button className="mb-3" type="link" onClick={() => history(-1)}>
+              Go back
+            </Button>
           </div>
         </Col>
       </Row>

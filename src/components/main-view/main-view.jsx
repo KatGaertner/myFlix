@@ -138,7 +138,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : (
-                  <ProfileView user={user} />
+                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4 p-4">
+                    <ProfileView movies={movies} />
+                  </Col>
                 )}
               </>
             }
