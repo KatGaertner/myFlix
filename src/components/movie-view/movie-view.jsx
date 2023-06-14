@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export const MovieView = ({ movies }) => {
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const token = localStorage.getItem("token");
   const [isFavorited, setFavorited] = useState(false);
 
   const history = useNavigate();
@@ -14,16 +16,39 @@ export const MovieView = ({ movies }) => {
   const movieData = movies.find((movie) => movie.id === movieID);
 
   useEffect(() => {
-    userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData.favorites.includes(movieData.id)) {
+    if (userData.favorites.includes(movieID)) {
       setFavorited(true);
+    } else {
+      setFavorited(false);
     }
-  }, []);
+  }, [movieID]);
 
   const toggleFavorited = () => {
-    setFavorited(!isFavorited);
-    // add API here
-    // save returned list to storage!
+    if (!isFavorited) {
+      fetch(`http://127.0.0.1:8080/users/${userData._id}/movies/${movieID}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          userData.favorites = JSON.parse(data);
+          localStorage.setItem("userData", JSON.stringify(userData));
+          setFavorited(true);
+        })
+        .catch((error) => console.log(error));
+    } else if (isFavorited) {
+      fetch(`http://127.0.0.1:8080/users/${userData._id}/movies/${movieID}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          userData.favorites = JSON.parse(data);
+          localStorage.setItem("userData", JSON.stringify(userData));
+          setFavorited(false);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   let genre = movieData.genres[0].name;
@@ -45,14 +70,32 @@ export const MovieView = ({ movies }) => {
             <h2>{movieData.directors[0].name}</h2>
             <div>{movieData.summary}</div>
             <div className="text-end">{movieData.genres[0].name}</div>
-            <Button onClick={() => toggleFavorited()}>
-              {!isFavorited && "Add to favorites"}
-              {isFavorited && "Remove from favorites"}
-            </Button>
           </div>
-          <div>
-            <Button className="mb-3" type="link" onClick={() => history(-1)}>
+          <div className="d-flex flex-row justify-content-between">
+            <Button className="mb-3" onClick={() => history(-1)}>
               Go back
+            </Button>
+            <Button
+              variant="link"
+              className="p-0"
+              onClick={() => toggleFavorited()}
+            >
+              {!isFavorited && (
+                <img
+                  src={require("./fav-false.svg")}
+                  title="Add to favorites"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
+              {isFavorited && (
+                <img
+                  src={require("./fav-true.svg")}
+                  title="Remove from favorites"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
             </Button>
           </div>
         </Col>
