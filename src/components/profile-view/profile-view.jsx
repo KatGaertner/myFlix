@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 import { Col, Row, Button, Form } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const ProfileView = ({ movies }) => {
   const [newUsername, setNewUsername] = useState("");
@@ -11,7 +11,8 @@ export const ProfileView = ({ movies }) => {
   const [newBirthday, setNewBirthday] = useState("");
   const [isOnEdit, setOnEdit] = useState(false);
 
-  userData = JSON.parse(localStorage.getItem("userData"));
+  let userData = JSON.parse(localStorage.getItem("userData"));
+  const token = localStorage.getItem("token");
 
   // layout
   const leftColumnWidth = 3;
@@ -19,10 +20,22 @@ export const ProfileView = ({ movies }) => {
 
   const handleToggle = () => {
     setOnEdit(!isOnEdit);
+    setNewUsername("");
+    setNewEmail("");
+    setNewBirthday("");
+    setNewPassword("");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const isEmpty = (obj) => {
+      if (Object.keys(obj).length === 0 && obj.constructor === Object) {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     let data = {};
 
@@ -39,18 +52,46 @@ export const ProfileView = ({ movies }) => {
         data.birthday = newBirthday;
         console.log("Change Birthday");
       }
-      console.log(data);
+      if (newPassword) {
+        data.password = newPassword;
+        console.log("Change Password");
+      }
 
-      // add API here
-      // save changes to local storage!
-
-      // only on success
-      handleToggle();
-
-      // reset
-      setNewUsername("");
-      setNewEmail("");
-      setNewBirthday("");
+      if (!isEmpty(data)) {
+        fetch(`http://127.0.0.1:8080/users/${userData._id}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            console.log(response);
+            if (response.ok) {
+              return response.json();
+            } else {
+              let contentType = response.headers.get("content-type");
+              if (contentType.includes("text/html")) {
+                response.text().then((info) => alert(info));
+                throw "Error";
+              } else if (contentType.includes("application/json")) {
+                response.json().then((info) => {
+                  alert(info.errors.map((e) => e.msg).join("\n"));
+                });
+                throw "Error";
+              }
+            }
+          })
+          .then((data) => {
+            userData = data;
+            localStorage.setItem("userData", JSON.stringify(data));
+            handleToggle();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
@@ -163,7 +204,7 @@ export const ProfileView = ({ movies }) => {
                 />
               </Col>
             </Form.Group>
-            {/* <Form.Group className="mb-3" as={Row}>
+            <Form.Group className="mb-3" as={Row}>
               <Form.Label column sm={leftColumnWidth} htmlFor="newPassword">
                 Password:
               </Form.Label>
@@ -177,7 +218,7 @@ export const ProfileView = ({ movies }) => {
                   minLength={8}
                 />
               </Col>
-            </Form.Group> */}
+            </Form.Group>
             <Button className="mb-3 w-100" type="submit">
               Save Changes
             </Button>
