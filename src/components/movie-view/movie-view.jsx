@@ -47,12 +47,7 @@ export const MovieView = ({ movies }) => {
           {similarMovies.map((movie) => {
             return (
               <div className="mb-3" key={movie.id}>
-                <MovieCard
-                  movieData={movie}
-                  onMovieClick={(newSelectedMovie) => {
-                    setSelectedMovie(newSelectedMovie);
-                  }}
-                />
+                <MovieCard movieData={movie} />
               </div>
             );
           })}
