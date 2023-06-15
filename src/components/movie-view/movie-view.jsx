@@ -1,9 +1,8 @@
 import { moviesType } from "../../utils/types";
 import { Col, Row, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { FavButton } from "../fav-button/fav-button";
 
 export const MovieView = ({ movies }) => {

@@ -4,7 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 
@@ -40,7 +40,7 @@ export const MainView = () => {
         setMovies(moviesFromAPI);
       })
       .catch((error) => console.log(error));
-  }, [token]); // dependency array, ensures fetch is called when token changes
+  }, [token]);
 
   return (
     <BrowserRouter>

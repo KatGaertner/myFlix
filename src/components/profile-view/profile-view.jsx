@@ -1,8 +1,7 @@
 import { moviesType } from "../../utils/types";
-import { Col, Row, Button, Form, InputGroup } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Col, Row, Button, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PasswordField } from "../password-field/password-field";
 
 export const ProfileView = ({ movies }) => {
@@ -159,7 +158,6 @@ export const ProfileView = ({ movies }) => {
                 <Form.Control
                   type="text"
                   id="newUsername"
-                  // value={newUsername}
                   defaultValue={userData.name}
                   onChange={(e) => setNewUsername(e.target.value)}
                   minLength={5}
@@ -185,7 +183,6 @@ export const ProfileView = ({ movies }) => {
                 <Form.Control
                   type="email"
                   id="newEmail"
-                  // value={newEmail}
                   defaultValue={userData.email}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
@@ -199,7 +196,6 @@ export const ProfileView = ({ movies }) => {
                 <Form.Control
                   type="date"
                   id="newBirthday"
-                  // value={newBirthday}
                   defaultValue={userData.birthday}
                   onChange={(e) => setNewBirthday(e.target.value)}
                 />

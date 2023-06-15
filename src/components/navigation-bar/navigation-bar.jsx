@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {

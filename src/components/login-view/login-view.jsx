@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Button, Form, Col, Row, ModalTitle } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 
@@ -57,14 +57,6 @@ export const LoginView = ({ onLoggedIn }) => {
           onChange={(e) => setPassword(e.target.value)}
           required={true}
         />
-        {/* <Form.Control
-          type="password"
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /> */}
         <Form.Check
           className="mb-2 mx-1"
           type="checkbox"

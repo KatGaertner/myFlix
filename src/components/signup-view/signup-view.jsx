@@ -14,7 +14,7 @@ export const SignupView = () => {
   const rightColumnWidth = 12 - leftColumnWidth;
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // because default is reloading the entire page
+    event.preventDefault();
 
     const data = {
       name: username,
@@ -130,15 +130,6 @@ export const SignupView = () => {
               required={true}
               ariaDescribedby={"passwordText"}
             />
-            {/* <Form.Control
-              type="password"
-              id="password"
-              aria-describedby="passwordText"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={8}
-            /> */}
           </Col>
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
             <Form.Text id="passwordText">

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FavButton } from "../fav-button/fav-button";
 
