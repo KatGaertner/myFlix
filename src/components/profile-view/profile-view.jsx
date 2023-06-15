@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import { moviesType } from "../../utils/types";
 import { Col, Row, Button, Form, InputGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
@@ -236,4 +236,8 @@ export const ProfileView = ({ movies }) => {
       </div>
     </>
   );
+};
+
+ProfileView.propTypes = {
+  movies: moviesType.isRequired,
 };

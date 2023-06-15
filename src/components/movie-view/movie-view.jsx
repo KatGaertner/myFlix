@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import { moviesType } from "../../utils/types";
 import { Col, Row, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
@@ -58,21 +58,5 @@ export const MovieView = ({ movies }) => {
 };
 
 MovieView.propTypes = {
-  movies: propTypes.arrayOf(
-    propTypes.shape({
-      title: propTypes.string.isRequired,
-      summary: propTypes.string,
-      directors: propTypes.arrayOf(
-        propTypes.shape({
-          name: propTypes.string.isRequired,
-        })
-      ).isRequired,
-      genres: propTypes.arrayOf(
-        propTypes.shape({
-          name: propTypes.string.isRequired,
-        })
-      ).isRequired,
-      imageURL: propTypes.string.isRequired,
-    })
-  ).isRequired,
+  movies: moviesType.isRequired,
 };

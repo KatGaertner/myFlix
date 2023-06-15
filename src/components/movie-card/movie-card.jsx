@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FavButton } from "../fav-button/fav-button";
@@ -24,13 +24,22 @@ export const MovieCard = ({ movieData }) => {
 };
 
 MovieCard.propTypes = {
-  movieData: propTypes.shape({
-    title: propTypes.string.isRequired,
-    directors: propTypes.arrayOf(
-      propTypes.shape({
-        name: propTypes.string.isRequired,
+  movieData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string,
+    directors: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
       })
     ).isRequired,
-    imageURL: propTypes.string.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    imageURL: PropTypes.string.isRequired,
+    featured: PropTypes.bool.isRequired,
   }).isRequired,
 };

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Form, Col, Row, ModalTitle } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -85,4 +86,8 @@ export const LoginView = ({ onLoggedIn }) => {
       </Link>
     </div>
   );
+};
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
 };

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
@@ -62,4 +63,8 @@ export const FavButton = ({ movieID }) => {
       )}
     </Button>
   );
+};
+
+FavButton.propTypes = {
+  movieID: PropTypes.string.isRequired,
 };

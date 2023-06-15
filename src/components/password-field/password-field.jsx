@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Form, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 
@@ -54,4 +55,14 @@ export const PasswordField = ({
       </InputGroup>
     </>
   );
+};
+
+PasswordField.propTypes = {
+  fieldID: PropTypes.string,
+  fieldValue: PropTypes.string,
+  onChange: PropTypes.func,
+  fieldPlaceholder: PropTypes.string,
+  required: PropTypes.bool,
+  className: PropTypes.string,
+  ariaDescribedby: PropTypes.string,
 };
