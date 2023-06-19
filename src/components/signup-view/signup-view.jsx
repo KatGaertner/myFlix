@@ -50,7 +50,7 @@ export const SignupView = () => {
   };
 
   return (
-    <div className="p-4 rounded-4 bg-body">
+    <div className="p-4">
       <h1 className="text-center">Sign up</h1>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3" as={Row}>

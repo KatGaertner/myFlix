@@ -7,6 +7,8 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { Col, Row } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
+import { NoDataInfo } from "./noData-info";
+import { MovieGrid } from "../movie-grid/movie-grid";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -52,7 +54,7 @@ export const MainView = () => {
           localStorage.clear();
         }}
       />
-      <Row className="justify-content-center g-0">
+      <Row className="justify-content-center g-0 p-sm-4">
         <Routes>
           <Route
             path="/signup"
@@ -61,7 +63,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col sm={10} md={8} lg={6}>
+                  <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
                     <SignupView />
                   </Col>
                 )}
@@ -75,7 +77,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col sm={8} md={6} lg={4}>
+                  <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
                     <LoginView
                       onLoggedIn={(user, token) => {
                         setUser(user);
@@ -94,11 +96,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col className="d-flex justify-content-center rounded-4 bg-body">
-                    <div>No movies found</div>
-                  </Col>
+                  <NoDataInfo />
                 ) : (
-                  <Col md={8} className="bg-body rounded-4">
+                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
                     <MovieView movies={movies} />
                   </Col>
                 )}
@@ -112,20 +112,10 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col className="d-flex justify-content-center rounded-4 bg-body">
-                    <div>No movies found</div>
-                  </Col>
+                  <NoDataInfo />
                 ) : (
-                  <Col md={10} className="bg-body rounded-4">
-                    <div className="grid-container">
-                      {movies.map((movie) => {
-                        return (
-                          <div className="mb-3" key={movie.id}>
-                            <MovieCard movieData={movie} />
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <Col md={10} lg={8} className="bg-body rounded-4 p-2">
+                    <MovieGrid movies={movies} />
                   </Col>
                 )}
               </>
@@ -138,8 +128,8 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : (
-                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4 p-4">
-                    <ProfileView movies={movies} />
+                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                    <ProfileView movies={movies} storedUser={storedUser} />
                   </Col>
                 )}
               </>
