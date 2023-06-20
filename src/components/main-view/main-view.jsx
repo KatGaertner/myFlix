@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { NoDataInfo } from "./noData-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/reducers/movies";
 import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
@@ -17,7 +19,10 @@ export const MainView = () => {
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
+  const movies = useSelector((state) => state.movies);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // only fetch list when token is there
@@ -41,7 +46,7 @@ export const MainView = () => {
             imageURL: movie.imageURL,
           };
         });
-        setMovies(moviesFromAPI);
+        dispatch(setMovies(moviesFromAPI));
       })
       .catch((error) => console.error(error));
   }, [token]);
