@@ -1,29 +1,26 @@
 import { moviesType } from "../../utils/types";
 import { Col, Row, Button, Form } from "react-bootstrap";
-import { MovieCard } from "../movie-card/movie-card";
 import { useState } from "react";
 import { PasswordField } from "../password-field/password-field";
+import { MovieGrid } from "../movie-grid/movie-grid";
+import { leftColumnWidth, rightColumnWidth } from "./layout";
+import { ProfileShow } from "./profile-show";
 
 export const ProfileView = ({ movies }) => {
-  const [newUsername, setNewUsername] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newBirthday, setNewBirthday] = useState("");
+  const [newUserData, setNewUserData] = useState({});
   const [isOnEdit, setOnEdit] = useState(false);
 
   let userData = JSON.parse(localStorage.getItem("userData"));
   const token = localStorage.getItem("token");
 
-  // layout
-  const leftColumnWidth = 3;
-  const rightColumnWidth = 12 - leftColumnWidth;
-
   const handleToggle = () => {
     setOnEdit(!isOnEdit);
-    setNewUsername("");
-    setNewEmail("");
-    setNewBirthday("");
-    setNewPassword("");
+    setNewUserData({});
+  };
+
+  const handleChange = (key, value) => {
+    let update = { [key]: value };
+    setNewUserData((newUserData) => ({ ...newUserData, ...update }));
   };
 
   const handleSubmit = (event) => {
@@ -40,21 +37,15 @@ export const ProfileView = ({ movies }) => {
     let data = {};
 
     if (event.target.reportValidity()) {
-      if (newUsername && newUsername !== userData.name) {
-        data.name = newUsername;
-        console.log("Change username");
-      }
-      if (newEmail && newEmail !== userData.email) {
-        data.email = newEmail;
-        console.log("Change Email");
-      }
-      if (newBirthday && newBirthday !== userData.birthday) {
-        data.birthday = newBirthday;
-        console.log("Change Birthday");
-      }
-      if (newPassword) {
+      ["name", "email", "birthday"].forEach((key) => {
+        if (newUserData[key] && newUserData[key] !== userData[key]) {
+          data[key] = newUserData[key];
+          console.log("Changed " + key);
+        }
+      });
+      if (newUserData.password) {
         data.password = newPassword;
-        console.log("Change Password");
+        console.log("Changed Password");
       }
 
       if (!isEmpty(data)) {
@@ -67,7 +58,6 @@ export const ProfileView = ({ movies }) => {
           body: JSON.stringify(data),
         })
           .then((response) => {
-            console.log(response);
             if (response.ok) {
               return response.json();
             } else {
@@ -95,18 +85,6 @@ export const ProfileView = ({ movies }) => {
     }
   };
 
-  const showBirthday = (datafield) => {
-    if (datafield) {
-      return datafield;
-    } else {
-      return <i>not set</i>;
-    }
-  };
-
-  const favMovies = movies.filter((movie) =>
-    userData.favorites.includes(movie.id)
-  );
-
   return (
     <>
       {!isOnEdit && (
@@ -116,24 +94,7 @@ export const ProfileView = ({ movies }) => {
             Edit
           </Button>
 
-          <Row className="my-3">
-            <Col sm={leftColumnWidth} className="">
-              Username:
-            </Col>
-            <Col sm={rightColumnWidth}>{userData.name}</Col>
-          </Row>
-          <Row className="my-3">
-            <Col sm={leftColumnWidth} className="">
-              E-Mail:
-            </Col>
-            <Col sm={rightColumnWidth}>{userData.email}</Col>
-          </Row>
-          <Row className="my-3">
-            <Col sm={leftColumnWidth} className="">
-              Birthday:
-            </Col>
-            <Col sm={rightColumnWidth}>{showBirthday(userData.birthday)}</Col>
-          </Row>
+          <ProfileShow userData={userData} />
         </>
       )}
 
@@ -159,7 +120,7 @@ export const ProfileView = ({ movies }) => {
                   type="text"
                   id="newUsername"
                   defaultValue={userData.name}
-                  onChange={(e) => setNewUsername(e.target.value)}
+                  onChange={(e) => handleChange("name", e.target.value)}
                   minLength={5}
                   pattern="^[a-zA-Z0-9]*$"
                   onInvalid={(e) => {
@@ -184,7 +145,7 @@ export const ProfileView = ({ movies }) => {
                   type="email"
                   id="newEmail"
                   defaultValue={userData.email}
-                  onChange={(e) => setNewEmail(e.target.value)}
+                  onChange={(e) => handleChange("email", e.target.value)}
                 />
               </Col>
             </Form.Group>
@@ -197,7 +158,7 @@ export const ProfileView = ({ movies }) => {
                   type="date"
                   id="newBirthday"
                   defaultValue={userData.birthday}
-                  onChange={(e) => setNewBirthday(e.target.value)}
+                  onChange={(e) => handleChange("birthday", e.target.value)}
                 />
               </Col>
             </Form.Group>
@@ -208,8 +169,8 @@ export const ProfileView = ({ movies }) => {
               <Col sm={rightColumnWidth}>
                 <PasswordField
                   fieldID={"newPassword"}
-                  fieldValue={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  fieldValue={newUserData.password}
+                  onChange={(e) => handleChange("password", e.target.value)}
                 />
               </Col>
             </Form.Group>
@@ -221,15 +182,9 @@ export const ProfileView = ({ movies }) => {
       )}
 
       <h2>Your favorites</h2>
-      <div className="grid-container">
-        {favMovies.map((movie) => {
-          return (
-            <div className="mb-3" key={movie.id}>
-              <MovieCard movieData={movie} />
-            </div>
-          );
-        })}
-      </div>
+      <MovieGrid
+        movies={movies.filter((movie) => userData.favorites.includes(movie.id))}
+      />
     </>
   );
 };
