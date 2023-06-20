@@ -1,6 +1,6 @@
-import { moviesType } from "../../utils/types";
 import { Col, Row } from "react-bootstrap";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
+import PropTypes from "prop-types";
 
 export const ProfileShow = ({ userData }) => {
   const showBirthday = (datafield) => {
@@ -33,4 +33,14 @@ export const ProfileShow = ({ userData }) => {
       </Row>
     </>
   );
+};
+
+ProfileShow.propTypes = {
+  userData: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    birthday: PropTypes.instanceOf(Date),
+    favorites: PropTypes.arrayOf(PropTypes.string),
+  }),
 };

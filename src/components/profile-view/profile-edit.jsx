@@ -1,6 +1,7 @@
 import { Col, Row, Button, Form } from "react-bootstrap";
 import { PasswordField } from "../password-field/password-field";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
+import PropTypes from "prop-types";
 
 export const ProfileEdit = ({
   userData,
@@ -83,4 +84,22 @@ export const ProfileEdit = ({
       </Button>
     </Form>
   );
+};
+
+ProfileEdit.propTypes = {
+  userData: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    birthday: PropTypes.instanceOf(Date),
+    favorites: PropTypes.arrayOf(PropTypes.string),
+  }),
+  newUserData: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    birthday: PropTypes.instanceOf(Date),
+    favorites: PropTypes.arrayOf(PropTypes.string),
+  }),
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
