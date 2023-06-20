@@ -1,16 +1,22 @@
 import { moviesType } from "../../utils/types";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 
-export const ProfileView = ({ movies }) => {
+export const ProfileView = ({ movies, storedUser, storedToken }) => {
   const [newUserData, setNewUserData] = useState({});
   const [isOnEdit, setOnEdit] = useState(false);
+  const [userData, setUserData] = useState(storedUser);
+  const [token, setToken] = useState(storedToken);
 
-  let userData = JSON.parse(localStorage.getItem("userData"));
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    let storedUser = JSON.parse(localStorage.getItem("userData"));
+    setUserData(storedUser);
+    let storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  }, []);
 
   const handleToggle = () => {
     setOnEdit(!isOnEdit);
@@ -73,7 +79,7 @@ export const ProfileView = ({ movies }) => {
             }
           })
           .then((data) => {
-            userData = data;
+            setUserData(data);
             localStorage.setItem("userData", JSON.stringify(data));
             handleToggle();
           })

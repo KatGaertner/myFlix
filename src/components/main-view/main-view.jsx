@@ -129,7 +129,11 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <ProfileView movies={movies} storedUser={storedUser} />
+                    <ProfileView
+                      movies={movies}
+                      storedUser={storedUser}
+                      storedToken={storedToken}
+                    />
                   </Col>
                 )}
               </>

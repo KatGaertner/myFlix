@@ -27466,7 +27466,8 @@ const MainView = ()=>{
                                     className: "bg-body rounded-4",
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                         movies: movies,
-                                        storedUser: storedUser
+                                        storedUser: storedUser,
+                                        storedToken: storedToken
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false)
@@ -47711,12 +47712,18 @@ var _movieGrid = require("../movie-grid/movie-grid");
 var _profileShow = require("./profile-show");
 var _profileEdit = require("./profile-edit");
 var _s = $RefreshSig$();
-const ProfileView = ({ movies  })=>{
+const ProfileView = ({ movies , storedUser , storedToken  })=>{
     _s();
     const [newUserData, setNewUserData] = (0, _react.useState)({});
     const [isOnEdit, setOnEdit] = (0, _react.useState)(false);
-    let userData = JSON.parse(localStorage.getItem("userData"));
-    const token = localStorage.getItem("token");
+    const [userData, setUserData] = (0, _react.useState)(storedUser);
+    const [token, setToken] = (0, _react.useState)(storedToken);
+    (0, _react.useEffect)(()=>{
+        let storedUser = JSON.parse(localStorage.getItem("userData"));
+        setUserData(storedUser);
+        let storedToken = localStorage.getItem("token");
+        setToken(storedToken);
+    }, []);
     const handleToggle = ()=>{
         setOnEdit(!isOnEdit);
         setNewUserData({});
@@ -47774,7 +47781,7 @@ const ProfileView = ({ movies  })=>{
                     }
                 }
             }).then((data)=>{
-                userData = data;
+                setUserData(data);
                 localStorage.setItem("userData", JSON.stringify(data));
                 handleToggle();
             }).catch((error)=>{
@@ -47789,7 +47796,7 @@ const ProfileView = ({ movies  })=>{
                 children: "Your profile "
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 89,
+                lineNumber: 95,
                 columnNumber: 7
             }, undefined),
             !isOnEdit && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
@@ -47801,14 +47808,14 @@ const ProfileView = ({ movies  })=>{
                         children: "Edit"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 92,
+                        lineNumber: 98,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileShow.ProfileShow), {
                         userData: userData
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 100,
+                        lineNumber: 106,
                         columnNumber: 11
                     }, undefined)
                 ]
@@ -47822,7 +47829,7 @@ const ProfileView = ({ movies  })=>{
                         children: "Exit"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 106,
+                        lineNumber: 112,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileEdit.ProfileEdit), {
@@ -47832,7 +47839,7 @@ const ProfileView = ({ movies  })=>{
                         handleSubmit: handleSubmit
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 114,
+                        lineNumber: 120,
                         columnNumber: 11
                     }, undefined)
                 ]
@@ -47841,20 +47848,20 @@ const ProfileView = ({ movies  })=>{
                 children: "Your favorites"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 123,
+                lineNumber: 129,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieGrid.MovieGrid), {
                 movies: movies.filter((movie)=>userData.favorites.includes(movie.id))
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 124,
+                lineNumber: 130,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(ProfileView, "AUz6WVfSxDxR1mL9orQrEi31d+o=");
+_s(ProfileView, "5LWF5zaRgicplxu0TbhENABErqE=");
 _c = ProfileView;
 ProfileView.propTypes = {
     movies: (0, _types.moviesType).isRequired
@@ -47878,9 +47885,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ProfileShow", ()=>ProfileShow);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _types = require("../../utils/types");
 var _reactBootstrap = require("react-bootstrap");
 var _layout = require("./layout");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 const ProfileShow = ({ userData  })=>{
     const showBirthday = (datafield)=>{
         if (datafield) return datafield;
@@ -47976,6 +47984,15 @@ const ProfileShow = ({ userData  })=>{
     }, void 0, true);
 };
 _c = ProfileShow;
+ProfileShow.propTypes = {
+    userData: (0, _propTypesDefault.default).shape({
+        _id: (0, _propTypesDefault.default).string.isRequired,
+        name: (0, _propTypesDefault.default).string.isRequired,
+        email: (0, _propTypesDefault.default).string.isRequired,
+        birthday: (0, _propTypesDefault.default).instanceOf(Date),
+        favorites: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).string)
+    })
+};
 var _c;
 $RefreshReg$(_c, "ProfileShow");
 
@@ -47984,7 +48001,7 @@ $RefreshReg$(_c, "ProfileShow");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../../utils/types":"agoPS","react-bootstrap":"3AD9A","./layout":"90yj6","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM"}],"90yj6":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","./layout":"90yj6","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM","prop-types":"7wKI2"}],"90yj6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "leftColumnWidth", ()=>leftColumnWidth);
@@ -48006,6 +48023,8 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _reactBootstrap = require("react-bootstrap");
 var _passwordField = require("../password-field/password-field");
 var _layout = require("./layout");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
         onSubmit: handleSubmit,
@@ -48023,7 +48042,7 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                         children: "Username:"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 14,
+                        lineNumber: 15,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -48041,23 +48060,23 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                             }
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-edit.jsx",
-                            lineNumber: 23,
+                            lineNumber: 24,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 22,
+                        lineNumber: 23,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control.Feedback, {}, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 41,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-edit.jsx",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -48071,7 +48090,7 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                         children: "E-Mail:"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 44,
+                        lineNumber: 45,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -48083,18 +48102,18 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                             onChange: (e)=>handleChange("email", e.target.value)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-edit.jsx",
-                            lineNumber: 48,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 47,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-edit.jsx",
-                lineNumber: 43,
+                lineNumber: 44,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -48108,7 +48127,7 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                         children: "Birthday:"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 57,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -48120,18 +48139,18 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                             onChange: (e)=>handleChange("birthday", e.target.value)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-edit.jsx",
-                            lineNumber: 61,
+                            lineNumber: 62,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 60,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-edit.jsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -48145,7 +48164,7 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                         children: "Password:"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 70,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -48156,18 +48175,18 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                             onChange: (e)=>handleChange("password", e.target.value)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-edit.jsx",
-                            lineNumber: 74,
+                            lineNumber: 75,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-edit.jsx",
-                        lineNumber: 73,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-edit.jsx",
-                lineNumber: 69,
+                lineNumber: 70,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -48176,17 +48195,34 @@ const ProfileEdit = ({ userData , newUserData , handleChange , handleSubmit  })=
                 children: "Save Changes"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-edit.jsx",
-                lineNumber: 81,
+                lineNumber: 82,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/profile-edit.jsx",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 5
     }, undefined);
 };
 _c = ProfileEdit;
+ProfileEdit.propTypes = {
+    userData: (0, _propTypesDefault.default).shape({
+        _id: (0, _propTypesDefault.default).string.isRequired,
+        name: (0, _propTypesDefault.default).string.isRequired,
+        email: (0, _propTypesDefault.default).string.isRequired,
+        birthday: (0, _propTypesDefault.default).instanceOf(Date),
+        favorites: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).string)
+    }),
+    newUserData: (0, _propTypesDefault.default).shape({
+        name: (0, _propTypesDefault.default).string,
+        email: (0, _propTypesDefault.default).string,
+        birthday: (0, _propTypesDefault.default).instanceOf(Date),
+        favorites: (0, _propTypesDefault.default).arrayOf((0, _propTypesDefault.default).string)
+    }),
+    handleChange: (0, _propTypesDefault.default).func.isRequired,
+    handleSubmit: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "ProfileEdit");
 
@@ -48195,7 +48231,7 @@ $RefreshReg$(_c, "ProfileEdit");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","../password-field/password-field":"kLukH","./layout":"90yj6","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM"}],"kB8Hd":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","../password-field/password-field":"kLukH","./layout":"90yj6","@parcel/transformer-js/src/esmodule-helpers.js":"a9zY8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6LiFM","prop-types":"7wKI2"}],"kB8Hd":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$be88 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
