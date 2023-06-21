@@ -6,17 +6,17 @@ import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../../redux/reducers/userData";
 
 export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
   const movies = useSelector((state) => state.movies);
   const [isOnEdit, setOnEdit] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [token, setToken] = useState("");
+  const userData = useSelector((state) => state.userData);
+  const [token, setToken] = useState(storedToken);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    let storedUser = JSON.parse(localStorage.getItem("userData"));
-    setUserData(storedUser);
     let storedToken = localStorage.getItem("token");
     setToken(storedToken);
   }, []);
@@ -60,7 +60,7 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
           }
         })
         .then((data) => {
-          setUserData(data);
+          dispatch(setUserData(data));
           localStorage.setItem("userData", JSON.stringify(data));
           handleToggle();
         })
@@ -106,7 +106,7 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
           <h2 className="">Your profile </h2>
           {!isOnEdit && (
             <>
-              <ProfileShow userData={userData} handleToggle={handleToggle} />
+              <ProfileShow />
             </>
           )}
           {isOnEdit && (

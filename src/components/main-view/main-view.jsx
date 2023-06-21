@@ -15,12 +15,16 @@ import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("userData"));
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  // const [movies, setMovies] = useState([]);
   const movies = useSelector((state) => state.movies);
+  const userData = useSelector((state) => state.userData);
+
+  const loggedIn = () => (Object.keys(userData).length === 0 ? false : true);
+
+  useEffect(() => {
+    console.log(userData);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -53,21 +57,14 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar
-        user={user ? true : false}
-        onLoggedOut={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-      />
+      <NavigationBar />
       <Row className="justify-content-center g-0 p-sm-4">
         <Routes>
           <Route
             path="/signup"
             element={
               <>
-                {user ? (
+                {loggedIn() ? (
                   <Navigate to="/" />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
@@ -81,16 +78,11 @@ export const MainView = () => {
             path="/login"
             element={
               <>
-                {user ? (
+                {loggedIn() ? (
                   <Navigate to="/" />
                 ) : (
                   <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
-                    <LoginView
-                      onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }}
-                    />
+                    <LoginView />
                   </Col>
                 )}
               </>
@@ -100,7 +92,7 @@ export const MainView = () => {
             path="/movies/:movieID"
             element={
               <>
-                {!user ? (
+                {!loggedIn() ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -116,7 +108,7 @@ export const MainView = () => {
             path="/directors/:directorName"
             element={
               <>
-                {!user ? (
+                {!loggedIn() ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -132,7 +124,7 @@ export const MainView = () => {
             path="/genres/:genreName"
             element={
               <>
-                {!user ? (
+                {!loggedIn() ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -148,7 +140,7 @@ export const MainView = () => {
             path="/"
             element={
               <>
-                {!user ? (
+                {!loggedIn() ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -164,7 +156,7 @@ export const MainView = () => {
             path="/profile"
             element={
               <>
-                {!user ? (
+                {!loggedIn() ? (
                   <Navigate to="/login" replace />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">

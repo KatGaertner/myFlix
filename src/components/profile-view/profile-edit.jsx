@@ -3,13 +3,10 @@ import { PasswordField } from "../password-field/password-field";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
-export const ProfileEdit = ({
-  userData,
-  handleUpdate,
-  handleDelete,
-  handleToggle,
-}) => {
+export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
+  const userData = useSelector((state) => state.userData);
   const [newUserData, setNewUserData] = useState({
     name: userData.name,
     email: userData.email,

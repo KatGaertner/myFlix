@@ -1,8 +1,11 @@
 import { Col, Row, Button } from "react-bootstrap";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
-export const ProfileShow = ({ userData, handleToggle }) => {
+export const ProfileShow = ({ handleToggle }) => {
+  const userData = useSelector((state) => state.userData);
+
   const showBirthday = (datafield) => {
     if (datafield) {
       // the date has to be parsed as UTC, otherwise it might get pushed around based on local timezones

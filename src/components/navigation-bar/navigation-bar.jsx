@@ -1,8 +1,14 @@
 import PropTypes from "prop-types";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducers/userData";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = () => {
+  const userData = useSelector((state) => state.userData);
+  // const user = userData ? true : false;
+  const dispatch = useDispatch();
+
   return (
     <Navbar
       bg="primary"
@@ -23,7 +29,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
       <Navbar.Toggle aria-controls="navbar" />
       <Navbar.Collapse id="navbar">
         <Nav className="w-100 d-flex align-items-baseline">
-          {!user ? (
+          {!userData ? (
             <>
               <Nav.Link as={Link} to="/login">
                 Log in
@@ -43,7 +49,11 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
               <Button
                 variant="outline-dark"
                 className="btn mx-3 ms-auto"
-                onClick={onLoggedOut}
+                onClick={() => {
+                  console.log(userData);
+                  dispatch(setUserData({}));
+                  console.log(userData);
+                }}
               >
                 <span style={{ fontFamily: "'Comfortaa', cursive" }}>
                   Logout

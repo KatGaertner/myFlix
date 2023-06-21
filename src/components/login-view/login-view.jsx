@@ -4,12 +4,17 @@ import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducers/userData";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData);
 
   const handleSubmit = (event) => {
+    console.log(userData);
     event.preventDefault(); // because default is reloading the entire page
 
     const data = {
@@ -25,9 +30,8 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.userData) {
-          localStorage.setItem("userData", JSON.stringify(data.userData));
           localStorage.setItem("token", data.token);
-          onLoggedIn(data.userData, data.token);
+          dispatch(setUserData(data.userData));
         } else {
           alert(data.info.message);
         }
