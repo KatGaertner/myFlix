@@ -37,7 +37,8 @@ export const SignupView = () => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
+          alert("Something went wrong.");
         });
     }
   };
