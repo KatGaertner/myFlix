@@ -36,7 +36,7 @@ export const MainView = () => {
         });
         setMovies(moviesFromAPI);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, [token]); // dependency array, ensures fetch is called when token changes
 
   if (!user) {
