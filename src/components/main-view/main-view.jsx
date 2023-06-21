@@ -24,7 +24,7 @@ export const MainView = () => {
         });
         setMovies(moviesFromAPI);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
 
   if (movies.length === 0) {
