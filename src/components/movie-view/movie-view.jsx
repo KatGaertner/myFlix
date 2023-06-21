@@ -5,8 +5,11 @@ import { FavButton } from "../fav-button/fav-button";
 import { BackButton } from "../back-button/back-button";
 import { SimilarMovies } from "./similar-movies";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = () => {
+  const movies = useSelector((state) => state.movies);
+
   const { movieID } = useParams();
   const movieData = movies.find((movie) => movie.id === movieID);
 
@@ -39,7 +42,7 @@ export const MovieView = ({ movies }) => {
       </Row>
       <hr />
       <div>
-        <SimilarMovies movies={movies} movieID={movieID} />
+        <SimilarMovies movieID={movieID} />
       </div>
     </div>
   );

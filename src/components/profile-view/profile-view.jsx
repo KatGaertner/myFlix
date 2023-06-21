@@ -6,8 +6,10 @@ import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
-export const ProfileView = ({ movies, onLoggedOut }) => {
+export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
+  const movies = useSelector((state) => state.movies);
   const [isOnEdit, setOnEdit] = useState(false);
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState("");

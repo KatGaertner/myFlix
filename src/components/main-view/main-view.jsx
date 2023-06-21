@@ -106,7 +106,7 @@ export const MainView = () => {
                   <NoDataInfo />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <MovieView movies={movies} />
+                    <MovieView />
                   </Col>
                 )}
               </>
@@ -154,7 +154,7 @@ export const MainView = () => {
                   <NoDataInfo />
                 ) : (
                   <Col md={10} lg={8} className="bg-body rounded-4 p-2">
-                    <MovieGrid movies={movies} />
+                    <MovieGrid />
                   </Col>
                 )}
               </>
@@ -169,7 +169,6 @@ export const MainView = () => {
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
                     <ProfileView
-                      movies={movies}
                       storedUser={storedUser}
                       storedToken={storedToken}
                       onLoggedOut={() => {
