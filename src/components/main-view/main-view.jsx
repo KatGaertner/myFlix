@@ -10,6 +10,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { NoDataInfo } from "./noData-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { API } from "../../utils/links";
+import { DirectorView } from "../director-view/director-view";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -101,6 +102,22 @@ export const MainView = () => {
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
                     <MovieView movies={movies} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/directors/:directorName"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <NoDataInfo />
+                ) : (
+                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                    <DirectorView movies={movies} />
                   </Col>
                 )}
               </>

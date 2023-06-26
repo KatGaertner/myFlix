@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { FavButton } from "../fav-button/fav-button";
 import { BackButton } from "../back-button/back-button";
 import { SimilarMovies } from "./similar-movies";
+import { Link } from "react-router-dom";
 
 export const MovieView = ({ movies }) => {
   const { movieID } = useParams();
@@ -18,7 +19,11 @@ export const MovieView = ({ movies }) => {
         <Col className="d-flex flex-column justify-content-between">
           <div>
             <h1>{movieData.title}</h1>
-            <h2>{movieData.directors[0].name}</h2>
+            <h2>
+              <Link to={`/directors/${movieData.directors[0].name}`}>
+                {movieData.directors[0].name}
+              </Link>
+            </h2>
             <div>{movieData.summary}</div>
             <div className="text-end">{movieData.genres[0].name}</div>
           </div>
