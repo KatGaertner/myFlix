@@ -78,6 +78,7 @@ export const ProfileEdit = ({
           <PasswordField
             autocomplete={"new-password"}
             fieldID={"newPassword"}
+            fieldValue={""}
             onChange={(e) => handleChange("password", e.target.value)}
           />
         </Col>
