@@ -22,7 +22,7 @@ export const SignupView = () => {
     };
 
     if (event.target.reportValidity()) {
-      fetch(`http://127.0.0.1:8080/users`, {
+      fetch(`https://movie-api-93299-83ca7447ffdb.herokuapp.com/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -42,7 +42,8 @@ export const SignupView = () => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
+          alert("Something went wrong.");
         });
     }
   };

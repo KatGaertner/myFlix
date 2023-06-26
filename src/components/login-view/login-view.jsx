@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Form, Col, Row, ModalTitle } from "react-bootstrap";
 
@@ -13,7 +14,7 @@ export const LoginView = ({ onLoggedIn }) => {
       password: password,
     };
 
-    fetch("http://127.0.0.1:8080/login", {
+    fetch("https://movie-api-93299-83ca7447ffdb.herokuapp.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -29,6 +30,7 @@ export const LoginView = ({ onLoggedIn }) => {
         }
       })
       .catch((error) => {
+        console.error(error);
         alert("Something went wrong.");
       });
   };
@@ -68,4 +70,8 @@ export const LoginView = ({ onLoggedIn }) => {
       </Form>
     </div>
   );
+};
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
 };

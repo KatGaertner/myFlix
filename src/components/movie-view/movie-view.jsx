@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Col, Row, Button } from "react-bootstrap";
 
 export const MovieView = ({ movieData, onBackClick }) => {
@@ -25,20 +25,20 @@ export const MovieView = ({ movieData, onBackClick }) => {
 };
 
 MovieView.propTypes = {
-  movieData: propTypes.shape({
-    title: propTypes.string.isRequired,
-    summary: propTypes.string,
-    directors: propTypes.arrayOf(
-      propTypes.shape({
-        name: propTypes.string.isRequired,
+  movieData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string,
+    directors: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
       })
     ).isRequired,
-    genres: propTypes.arrayOf(
-      propTypes.shape({
-        name: propTypes.string.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
       })
     ).isRequired,
-    imageURL: propTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
   }).isRequired,
-  onBackClick: propTypes.func.isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };

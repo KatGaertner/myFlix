@@ -19,7 +19,7 @@ export const MainView = () => {
       return;
     }
 
-    fetch("http://127.0.0.1:8080/movies", {
+    fetch("https://movie-api-93299-83ca7447ffdb.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -37,7 +37,7 @@ export const MainView = () => {
         });
         setMovies(moviesFromAPI);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, [token]); // dependency array, ensures fetch is called when token changes
 
   const renderView = () => {
