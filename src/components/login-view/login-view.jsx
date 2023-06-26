@@ -36,8 +36,8 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <div class="p-4 rounded-4 bg-body">
-      <h1 class="text-center">Log in</h1>
+    <div className="p-4 rounded-4 bg-body">
+      <h1 className="text-center">Log in</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Control
           className="mb-2"

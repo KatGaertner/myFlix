@@ -50,10 +50,10 @@ export const MainView = () => {
               setToken(token);
             }}
           />
-          <div class="d-flex justify-content-between rounded-4 bg-body">
-            <hr class="flex-grow-1" />
-            <span class="mx-3"> or </span>
-            <hr class="flex-grow-1" />
+          <div className="d-flex justify-content-between rounded-4 bg-body">
+            <hr className="flex-grow-1" />
+            <span className="mx-3"> or </span>
+            <hr className="flex-grow-1" />
           </div>
           <br />
           <SignupView />
@@ -86,10 +86,10 @@ export const MainView = () => {
           <hr />
           <Row>
             <p>Similar movies:</p>
-            <div class="grid-container">
+            <div className="grid-container">
               {similarMovies.map((movie) => {
                 return (
-                  <div class="mb-3" key={movie.id}>
+                  <div className="mb-3" key={movie.id}>
                     <MovieCard
                       movieData={movie}
                       onMovieClick={(newSelectedMovie) => {
@@ -107,10 +107,10 @@ export const MainView = () => {
 
     return (
       <Col md={10}>
-        <div class="grid-container">
+        <div className="grid-container">
           {movies.map((movie) => {
             return (
-              <div class="mb-3" key={movie.id}>
+              <div className="mb-3" key={movie.id}>
                 <MovieCard
                   movieData={movie}
                   onMovieClick={(newSelectedMovie) => {

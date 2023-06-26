@@ -49,8 +49,8 @@ export const SignupView = () => {
   };
 
   return (
-    <div class="p-4 rounded-4 bg-body">
-      <h1 class="text-center">Sign up</h1>
+    <div className="p-4 rounded-4 bg-body">
+      <h1 className="text-center">Sign up</h1>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3" as={Row}>
           <Form.Label
