@@ -7,16 +7,11 @@ import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import PropTypes from "prop-types";
 
-export const ProfileView = ({
-  movies,
-  storedUser,
-  storedToken,
-  onLoggedOut,
-}) => {
+export const ProfileView = ({ movies, onLoggedOut }) => {
   const [newUserData, setNewUserData] = useState({});
   const [isOnEdit, setOnEdit] = useState(false);
-  const [userData, setUserData] = useState(storedUser);
-  const [token, setToken] = useState(storedToken);
+  const [userData, setUserData] = useState({});
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     let storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -24,6 +19,14 @@ export const ProfileView = ({
     let storedToken = localStorage.getItem("token");
     setToken(storedToken);
   }, []);
+
+  const isEmpty = (obj) => {
+    if (Object.keys(obj).length === 0 && obj.constructor === Object) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const handleToggle = () => {
     setOnEdit(!isOnEdit);
@@ -37,14 +40,6 @@ export const ProfileView = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const isEmpty = (obj) => {
-      if (Object.keys(obj).length === 0 && obj.constructor === Object) {
-        return true;
-      } else {
-        return false;
-      }
-    };
 
     let data = {};
 
@@ -128,52 +123,54 @@ export const ProfileView = ({
 
   return (
     <>
-      <h2 className="d-inline-block">Your profile </h2>
-      {!isOnEdit && (
+      {!isEmpty(userData) && (
         <>
-          <Button
-            className="ms-3 mb-2"
-            variant="primary"
-            onClick={handleToggle}
-          >
-            Edit
-          </Button>
+          <h2 className="d-inline-block">Your profile </h2>
+          {!isOnEdit && (
+            <>
+              <Button
+                className="ms-3 mb-2"
+                variant="primary"
+                onClick={handleToggle}
+              >
+                Edit
+              </Button>
 
-          <ProfileShow userData={userData} />
-        </>
-      )}
+              <ProfileShow userData={userData} />
+            </>
+          )}
+          {isOnEdit && (
+            <>
+              <Button
+                className="ms-3 mb-2"
+                variant="secondary"
+                onClick={handleToggle}
+              >
+                Exit
+              </Button>
 
-      {isOnEdit && (
-        <>
-          <Button
-            className="ms-3 mb-2"
-            variant="secondary"
-            onClick={handleToggle}
-          >
-            Exit
-          </Button>
-
-          <ProfileEdit
-            userData={userData}
-            newUserData={newUserData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            handleDelete={handleDelete}
+              <ProfileEdit
+                userData={userData}
+                newUserData={newUserData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                handleDelete={handleDelete}
+              />
+            </>
+          )}
+          <h2>Your favorites</h2>
+          <MovieGrid
+            movies={movies.filter((movie) =>
+              userData.favorites.includes(movie.id)
+            )}
           />
         </>
       )}
-
-      <h2>Your favorites</h2>
-      <MovieGrid
-        movies={movies.filter((movie) => userData.favorites.includes(movie.id))}
-      />
     </>
   );
 };
 
 ProfileView.propTypes = {
   movies: moviesType.isRequired,
-  storedUser: PropTypes.object.isRequired,
-  storedToken: PropTypes.string.isRequired,
   onLoggedOut: PropTypes.func.isRequired,
 };
