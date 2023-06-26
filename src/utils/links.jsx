@@ -1,0 +1,1 @@
+export const API = 'https://movie-api-93299-83ca7447ffdb.herokuapp.com';

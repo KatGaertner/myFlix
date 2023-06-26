@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
+import { API } from "../../utils/links";
 
 export const ProfileView = ({ movies, storedUser, storedToken }) => {
   const [newUserData, setNewUserData] = useState({});
@@ -54,7 +55,7 @@ export const ProfileView = ({ movies, storedUser, storedToken }) => {
       }
 
       if (!isEmpty(data)) {
-        fetch(`http://127.0.0.1:8080/users/${userData._id}`, {
+        fetch(`${API}/users/${userData._id}`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,

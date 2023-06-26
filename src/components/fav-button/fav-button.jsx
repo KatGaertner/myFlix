@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { API } from "../../utils/links";
 
 export const FavButton = ({ movieID }) => {
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -17,7 +18,7 @@ export const FavButton = ({ movieID }) => {
 
   const toggleFavorited = () => {
     if (!isFavorited) {
-      fetch(`http://127.0.0.1:8080/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -29,7 +30,7 @@ export const FavButton = ({ movieID }) => {
         })
         .catch((error) => console.log(error));
     } else if (isFavorited) {
-      fetch(`http://127.0.0.1:8080/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       })

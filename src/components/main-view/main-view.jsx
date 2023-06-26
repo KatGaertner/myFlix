@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { NoDataInfo } from "./noData-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
+import { API } from "../../utils/links";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -23,7 +24,7 @@ export const MainView = () => {
       return;
     }
 
-    fetch("http://127.0.0.1:8080/movies", {
+    fetch(`${API}/movies`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())

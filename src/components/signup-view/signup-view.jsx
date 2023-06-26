@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Col, Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
+import { API } from "../../utils/links";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -24,7 +25,7 @@ export const SignupView = () => {
     };
 
     if (event.target.reportValidity()) {
-      fetch(`http://127.0.0.1:8080/users`, {
+      fetch(`${API}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
