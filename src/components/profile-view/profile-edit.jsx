@@ -51,7 +51,7 @@ export const ProfileEdit = ({
             type="email"
             id="newEmail"
             defaultValue={userData.email}
-            autoComplete="e-mail"
+            autoComplete="email"
             onChange={(e) => handleChange("email", e.target.value)}
           />
         </Col>

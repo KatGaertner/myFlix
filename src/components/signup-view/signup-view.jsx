@@ -103,7 +103,7 @@ export const SignupView = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              autoComplete="e-mail"
+              autoComplete="email"
               required
             />
           </Col>
