@@ -60,12 +60,12 @@ export const PasswordField = ({
 };
 
 PasswordField.propTypes = {
-  fieldID: PropTypes.string,
-  fieldValue: PropTypes.string,
-  onChange: PropTypes.func,
+  fieldID: PropTypes.string.isRequired,
+  fieldValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   fieldPlaceholder: PropTypes.string,
   required: PropTypes.bool,
   className: PropTypes.string,
   ariaDescribedby: PropTypes.string,
-  autocomplete: PropTypes.string,
+  autocomplete: PropTypes.string.isRequired,
 };
