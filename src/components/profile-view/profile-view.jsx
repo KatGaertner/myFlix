@@ -5,8 +5,14 @@ import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
+import { PropTypes } from "prop-types";
 
-export const ProfileView = ({ movies, storedUser, storedToken }) => {
+export const ProfileView = ({
+  movies,
+  storedUser,
+  storedToken,
+  onLoggedOut,
+}) => {
   const [newUserData, setNewUserData] = useState({});
   const [isOnEdit, setOnEdit] = useState(false);
   const [userData, setUserData] = useState(storedUser);
@@ -91,6 +97,35 @@ export const ProfileView = ({ movies, storedUser, storedToken }) => {
     }
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    let response = confirm("Are you sure you want to delete your profile?");
+
+    if (response) {
+      fetch(`${API}/users/${userData._id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.text();
+          } else {
+            throw Error;
+          }
+        })
+        .then((message) => {
+          alert(message);
+          onLoggedOut();
+        })
+        .catch(() => {
+          alert("Something went wrong.");
+        });
+    }
+  };
+
   return (
     <>
       <h2 className="d-inline-block">Your profile </h2>
@@ -123,6 +158,7 @@ export const ProfileView = ({ movies, storedUser, storedToken }) => {
             newUserData={newUserData}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            handleDelete={handleDelete}
           />
         </>
       )}
@@ -137,4 +173,5 @@ export const ProfileView = ({ movies, storedUser, storedToken }) => {
 
 ProfileView.propTypes = {
   movies: moviesType.isRequired,
+  onLoggedOut: PropTypes.func.isRequired,
 };

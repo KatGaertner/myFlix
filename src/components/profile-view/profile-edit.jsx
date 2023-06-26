@@ -8,6 +8,7 @@ export const ProfileEdit = ({
   newUserData,
   handleChange,
   handleSubmit,
+  handleDelete,
 }) => {
   return (
     <Form onSubmit={handleSubmit} noValidate>
@@ -86,6 +87,13 @@ export const ProfileEdit = ({
       <Button className="mb-3 w-100" type="submit">
         Save Changes
       </Button>
+      <Button
+        className="mb-3 w-100 btn-secondary"
+        type="submit"
+        onClick={handleDelete}
+      >
+        Delete Profile
+      </Button>
     </Form>
   );
 };
@@ -106,4 +114,5 @@ ProfileEdit.propTypes = {
   }),
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };

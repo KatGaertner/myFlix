@@ -134,6 +134,11 @@ export const MainView = () => {
                       movies={movies}
                       storedUser={storedUser}
                       storedToken={storedToken}
+                      onLoggedOut={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                      }}
                     />
                   </Col>
                 )}
