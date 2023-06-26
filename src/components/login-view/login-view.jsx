@@ -48,6 +48,7 @@ export const LoginView = ({ onLoggedIn }) => {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete="username"
           required
         />
         <PasswordField
@@ -56,6 +57,7 @@ export const LoginView = ({ onLoggedIn }) => {
           fieldPlaceholder={"Password"}
           fieldValue={password}
           onChange={(e) => setPassword(e.target.value)}
+          autocomplete={"current-password"}
           required={true}
         />
         <Form.Check

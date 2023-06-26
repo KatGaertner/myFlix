@@ -25,6 +25,7 @@ export const ProfileEdit = ({
             type="text"
             id="newUsername"
             defaultValue={userData.name}
+            autoComplete="username"
             onChange={(e) => handleChange("name", e.target.value)}
             minLength={5}
             pattern="^[a-zA-Z0-9]*$"
@@ -50,6 +51,7 @@ export const ProfileEdit = ({
             type="email"
             id="newEmail"
             defaultValue={userData.email}
+            autoComplete="e-mail"
             onChange={(e) => handleChange("email", e.target.value)}
           />
         </Col>
@@ -63,6 +65,7 @@ export const ProfileEdit = ({
             type="date"
             id="newBirthday"
             defaultValue={userData.birthday}
+            autoComplete="bday"
             onChange={(e) => handleChange("birthday", e.target.value)}
           />
         </Col>
@@ -73,8 +76,8 @@ export const ProfileEdit = ({
         </Form.Label>
         <Col sm={rightColumnWidth}>
           <PasswordField
+            autocomplete={"new-password"}
             fieldID={"newPassword"}
-            fieldValue={newUserData.password}
             onChange={(e) => handleChange("password", e.target.value)}
           />
         </Col>

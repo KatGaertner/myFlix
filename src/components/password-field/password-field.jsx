@@ -10,6 +10,7 @@ export const PasswordField = ({
   required = false,
   className = "",
   ariaDescribedby = "",
+  autocomplete,
 }) => {
   const [passwordFieldType, setPasswordFieldType] = useState("password");
 
@@ -33,6 +34,7 @@ export const PasswordField = ({
           placeholder={fieldPlaceholder}
           required={required}
           aria-describedby={ariaDescribedby}
+          autoComplete={autocomplete}
         />
         <InputGroup.Text className="bg-body">
           <img
@@ -65,4 +67,5 @@ PasswordField.propTypes = {
   required: PropTypes.bool,
   className: PropTypes.string,
   ariaDescribedby: PropTypes.string,
+  autocomplete: PropTypes.string,
 };

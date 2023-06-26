@@ -70,6 +70,7 @@ export const SignupView = () => {
               aria-describedby="usernameText"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
               required
               minLength={5}
               pattern="^[a-zA-Z0-9]*$"
@@ -102,6 +103,7 @@ export const SignupView = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="e-mail"
               required
             />
           </Col>
@@ -116,6 +118,7 @@ export const SignupView = () => {
               id="birthday"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
+              autoComplete="bday"
             />
           </Col>
         </Form.Group>
@@ -130,6 +133,7 @@ export const SignupView = () => {
               onChange={(e) => setPassword(e.target.value)}
               required={true}
               ariaDescribedby={"passwordText"}
+              autocomplete="new-password"
             />
           </Col>
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
