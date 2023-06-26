@@ -18,7 +18,7 @@ export const ProfileEdit = ({
           className="pe-5"
           htmlFor="newUsername"
         >
-          Username:
+          New Username:
         </Form.Label>
         <Col sm={rightColumnWidth}>
           <Form.Control
@@ -44,7 +44,7 @@ export const ProfileEdit = ({
       </Form.Group>
       <Form.Group className="mb-1" as={Row}>
         <Form.Label column sm={leftColumnWidth} htmlFor="newEmail">
-          E-Mail:
+          New E-Mail:
         </Form.Label>
         <Col sm={rightColumnWidth}>
           <Form.Control
@@ -58,7 +58,7 @@ export const ProfileEdit = ({
       </Form.Group>
       <Form.Group className="mb-1" as={Row}>
         <Form.Label column sm={leftColumnWidth} htmlFor="newBirthday">
-          Birthday:
+          New Birthday:
         </Form.Label>
         <Col sm={rightColumnWidth}>
           <Form.Control
@@ -72,7 +72,7 @@ export const ProfileEdit = ({
       </Form.Group>
       <Form.Group className="mb-3" as={Row}>
         <Form.Label column sm={leftColumnWidth} htmlFor="newPassword">
-          Password:
+          New Password:
         </Form.Label>
         <Col sm={rightColumnWidth}>
           <PasswordField
