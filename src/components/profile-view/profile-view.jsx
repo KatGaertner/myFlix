@@ -5,7 +5,7 @@ import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 
 export const ProfileView = ({
   movies,
@@ -173,5 +173,7 @@ export const ProfileView = ({
 
 ProfileView.propTypes = {
   movies: moviesType.isRequired,
+  storedUser: PropTypes.object.isRequired,
+  storedToken: PropTypes.string.isRequired,
   onLoggedOut: PropTypes.func.isRequired,
 };
