@@ -25,7 +25,11 @@ export const MovieView = ({ movies }) => {
               </Link>
             </h2>
             <div>{movieData.summary}</div>
-            <div className="text-end">{movieData.genres[0].name}</div>
+            <div className="text-end">
+              <Link to={`/genres/${movieData.genres[0].name}`}>
+                {movieData.genres[0].name}
+              </Link>
+            </div>
           </div>
           <div className="d-flex flex-row justify-content-between">
             <BackButton />
