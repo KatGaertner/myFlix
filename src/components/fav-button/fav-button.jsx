@@ -2,11 +2,14 @@ import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API } from "../../utils/links";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducers/userData";
 
 export const FavButton = ({ movieID }) => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const userData = useSelector((state) => state.userData);
   const token = localStorage.getItem("token");
   const [isFavorited, setFavorited] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userData.favorites.includes(movieID)) {
@@ -24,8 +27,7 @@ export const FavButton = ({ movieID }) => {
       })
         .then((response) => response.text())
         .then((data) => {
-          userData.favorites = JSON.parse(data);
-          localStorage.setItem("userData", JSON.stringify(userData));
+          dispatch(setUserData({ ...userData, favorites: JSON.parse(data) }));
           setFavorited(true);
         })
         .catch((error) => console.error(error));
@@ -36,8 +38,7 @@ export const FavButton = ({ movieID }) => {
       })
         .then((response) => response.text())
         .then((data) => {
-          userData.favorites = JSON.parse(data);
-          localStorage.setItem("userData", JSON.stringify(userData));
+          dispatch(setUserData({ ...userData, favorites: JSON.parse(data) }));
           setFavorited(false);
         })
         .catch((error) => console.error(error));
