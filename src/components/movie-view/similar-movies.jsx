@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { moviesType } from "../../utils/types";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector } from "react-redux";
 
@@ -23,6 +22,5 @@ export const SimilarMovies = ({ movieID }) => {
 };
 
 SimilarMovies.propTypes = {
-  movies: moviesType.isRequired,
   movieID: PropTypes.string.isRequired,
 };

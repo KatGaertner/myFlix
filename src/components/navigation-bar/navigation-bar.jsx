@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -65,9 +64,4 @@ export const NavigationBar = () => {
       </Navbar.Collapse>
     </Navbar>
   );
-};
-
-NavigationBar.propTypes = {
-  user: PropTypes.bool.isRequired,
-  onLoggedOut: PropTypes.func.isRequired,
 };

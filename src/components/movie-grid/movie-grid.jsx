@@ -19,5 +19,5 @@ export const MovieGrid = ({
 };
 
 MovieGrid.propTypes = {
-  movies: moviesType.isRequired,
+  movies: moviesType,
 };
