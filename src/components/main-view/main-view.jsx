@@ -17,7 +17,7 @@ import { GenreView } from "../genre-view/genre-view";
 export const MainView = () => {
   const storedToken = localStorage.getItem("token");
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
 
   const loggedIn = () => (Object.keys(userData).length === 0 ? false : true);

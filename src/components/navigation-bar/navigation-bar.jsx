@@ -2,6 +2,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "../../redux/reducers/userData";
+import { MoviesFilter } from "../movies-filter/movies-filter";
 
 export const NavigationBar = () => {
   const userData = useSelector((state) => state.userData);
@@ -44,11 +45,13 @@ export const NavigationBar = () => {
               <Nav.Link as={Link} to="/profile">
                 Profile
               </Nav.Link>
+              <MoviesFilter />
               <Button
                 variant="outline-dark"
                 className="btn mx-3 ms-auto"
                 onClick={() => {
                   dispatch(setUserData({}));
+                  localStorage.clear();
                 }}
               >
                 <span style={{ fontFamily: "'Comfortaa', cursive" }}>

@@ -3,7 +3,7 @@ import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector } from "react-redux";
 
 export const SimilarMovies = ({ movieID }) => {
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.movies.list);
   const movieData = movies.find((movie) => movie.id === movieID);
 
   let genre = movieData.genres[0].name;

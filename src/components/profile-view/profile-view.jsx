@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../redux/reducers/userData";
 
 export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.movies.list);
   const [isOnEdit, setOnEdit] = useState(false);
   const userData = useSelector((state) => state.userData);
   const [token, setToken] = useState(storedToken);
