@@ -9,17 +9,12 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../redux/reducers/userData";
 
-export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
+export const ProfileView = ({ onLoggedOut }) => {
   const movies = useSelector((state) => state.movies.list);
   const [isOnEdit, setOnEdit] = useState(false);
   const userData = useSelector((state) => state.userData);
-  const [token, setToken] = useState(storedToken);
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    let storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  }, []);
 
   const isEmpty = (obj) => {
     if (Object.keys(obj).length === 0 && obj.constructor === Object) {
@@ -61,7 +56,6 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
         })
         .then((data) => {
           dispatch(setUserData(data));
-          localStorage.setItem("userData", JSON.stringify(data));
           handleToggle();
         })
         .catch((error) => {
@@ -91,7 +85,8 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
         })
         .then((message) => {
           alert(message);
-          onLoggedOut();
+          dispatch(setUserData({}));
+          localStorage.clear();
         })
         .catch(() => {
           alert("Something went wrong.");
@@ -106,7 +101,7 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
           <h2 className="">Your profile </h2>
           {!isOnEdit && (
             <>
-              <ProfileShow />
+              <ProfileShow handleToggle={handleToggle} />
             </>
           )}
           {isOnEdit && (

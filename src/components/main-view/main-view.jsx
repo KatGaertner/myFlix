@@ -160,15 +160,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <ProfileView
-                      storedUser={storedUser}
-                      storedToken={storedToken}
-                      onLoggedOut={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                      }}
-                    />
+                    <ProfileView />
                   </Col>
                 )}
               </>

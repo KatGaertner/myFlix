@@ -11,10 +11,8 @@ export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.userData);
 
   const handleSubmit = (event) => {
-    console.log(userData);
     event.preventDefault(); // because default is reloading the entire page
 
     const data = {

@@ -41,18 +41,18 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
 
   return (
     <>
-      <div className="d-flex mb-2">
-        <Button className="" onClick={handleToggle}>
-          Exit
-        </Button>
-        <Button className="mx-2" type="submit">
-          Save Changes
-        </Button>
-        <Button className="ms-auto btn-secondary" onClick={handleDelete}>
-          Delete Profile
-        </Button>
-      </div>
       <Form onSubmit={handleSubmit} noValidate>
+        <div className="d-flex mb-2">
+          <Button className="" onClick={handleToggle}>
+            Exit
+          </Button>
+          <Button className="mx-2" type="submit">
+            Save Changes
+          </Button>
+          <Button className="ms-auto btn-secondary" onClick={handleDelete}>
+            Delete Profile
+          </Button>
+        </div>
         <Form.Group className="mb-1" as={Row}>
           <Form.Label
             column

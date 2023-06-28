@@ -16,18 +16,18 @@ export const ProfileShow = ({ handleToggle }) => {
       });
       return dateFormatter.format(new Date(datafield));
     } else {
-      return <i>not set</i>;
+      return "";
     }
   };
 
   return (
     <>
-      <div className="d-flex mb-2">
-        <Button className="mb-2" variant="primary" onClick={handleToggle}>
-          Edit
-        </Button>
-      </div>
       <Row className="my-3">
+        <div className="d-flex mb-2">
+          <Button className="mb-2" variant="primary" onClick={handleToggle}>
+            Edit
+          </Button>
+        </div>
         <Col sm={leftColumnWidth} className="">
           Username:
         </Col>
