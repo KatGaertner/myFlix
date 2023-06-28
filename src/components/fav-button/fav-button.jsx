@@ -28,7 +28,7 @@ export const FavButton = ({ movieID }) => {
           localStorage.setItem("userData", JSON.stringify(userData));
           setFavorited(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } else if (isFavorited) {
       fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
         method: "DELETE",
@@ -40,7 +40,7 @@ export const FavButton = ({ movieID }) => {
           localStorage.setItem("userData", JSON.stringify(userData));
           setFavorited(false);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     }
   };
 

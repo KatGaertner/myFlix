@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { moviesType } from "../../utils/types";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieGrid } from "../movie-grid/movie-grid";
 
 export const SimilarMovies = ({ movies, movieID }) => {

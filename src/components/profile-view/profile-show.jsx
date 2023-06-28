@@ -1,11 +1,17 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
 import PropTypes from "prop-types";
 
-export const ProfileShow = ({ userData }) => {
+export const ProfileShow = ({ userData, handleToggle }) => {
   const showBirthday = (datafield) => {
     if (datafield) {
-      return datafield;
+      // the date has to be parsed as UTC, otherwise it might get pushed around based on local timezones
+      // the "undefined" parameter should mean the date is in the local format in the browser
+      const dateFormatter = new Intl.DateTimeFormat(undefined, {
+        timeZone: "UTC",
+        dateStyle: "long",
+      });
+      return dateFormatter.format(new Date(datafield));
     } else {
       return <i>not set</i>;
     }
@@ -13,6 +19,11 @@ export const ProfileShow = ({ userData }) => {
 
   return (
     <>
+      <div className="d-flex mb-2">
+        <Button className="mb-2" variant="primary" onClick={handleToggle}>
+          Edit
+        </Button>
+      </div>
       <Row className="my-3">
         <Col sm={leftColumnWidth} className="">
           Username:
@@ -40,7 +51,7 @@ ProfileShow.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    birthday: PropTypes.instanceOf(Date),
+    birthday: PropTypes.string,
     favorites: PropTypes.arrayOf(PropTypes.string),
   }),
 };
