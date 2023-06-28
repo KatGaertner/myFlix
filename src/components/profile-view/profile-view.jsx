@@ -86,7 +86,7 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
             handleToggle();
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
           });
       }
     }
