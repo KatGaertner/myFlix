@@ -32,8 +32,6 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
   };
 
   const handleUpdate = (data) => {
-    console.log("data in Parent: ", data);
-
     if (!isEmpty(data)) {
       fetch(`${API}/users/${userData._id}`, {
         method: "PUT",
