@@ -47,7 +47,3 @@ export const MovieView = () => {
     </div>
   );
 };
-
-MovieView.propTypes = {
-  movies: moviesType.isRequired,
-};

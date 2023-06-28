@@ -132,6 +132,5 @@ export const ProfileView = ({ onLoggedOut, storedUser, storedToken }) => {
 };
 
 ProfileView.propTypes = {
-  movies: moviesType.isRequired,
   onLoggedOut: PropTypes.func.isRequired,
 };
