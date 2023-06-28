@@ -5,7 +5,6 @@ import { setUserData } from "../../redux/reducers/userData";
 
 export const NavigationBar = () => {
   const userData = useSelector((state) => state.userData);
-  // const user = userData ? true : false;
   const dispatch = useDispatch();
 
   return (
@@ -49,9 +48,7 @@ export const NavigationBar = () => {
                 variant="outline-dark"
                 className="btn mx-3 ms-auto"
                 onClick={() => {
-                  console.log(userData);
                   dispatch(setUserData({}));
-                  console.log(userData);
                 }}
               >
                 <span style={{ fontFamily: "'Comfortaa', cursive" }}>
