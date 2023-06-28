@@ -1,15 +1,42 @@
 import { Col, Row, Button, Form } from "react-bootstrap";
 import { PasswordField } from "../password-field/password-field";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
-export const ProfileEdit = ({
-  userData,
-  newUserData,
-  handleChange,
-  handleSubmit,
-  handleDelete,
-}) => {
+export const ProfileEdit = ({ userData, handleUpdate, handleDelete }) => {
+  const [newUserData, setNewUserData] = useState({
+    name: userData.name,
+    email: userData.email,
+    birthday: userData.birthday,
+    password: "",
+  });
+
+  const handleChange = (key, value) => {
+    const change = { [key]: value };
+    setNewUserData((newUserData) => ({ ...newUserData, ...change }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let update = {};
+
+    if (event.target.reportValidity()) {
+      ["name", "email", "birthday"].forEach((key) => {
+        if (newUserData[key] && newUserData[key] !== userData[key]) {
+          update[key] = newUserData[key];
+          console.log("Changed " + key);
+        }
+      });
+      if (newUserData.password) {
+        update.password = newUserData.password;
+        console.log("Changed Password");
+      }
+    }
+    handleUpdate(update);
+  };
+
   return (
     <Form onSubmit={handleSubmit} noValidate>
       <Form.Group className="mb-1" as={Row}>
@@ -25,7 +52,7 @@ export const ProfileEdit = ({
           <Form.Control
             type="text"
             id="newUsername"
-            defaultValue={userData.name}
+            value={newUserData.name}
             autoComplete="username"
             onChange={(e) => handleChange("name", e.target.value)}
             minLength={5}
@@ -51,7 +78,7 @@ export const ProfileEdit = ({
           <Form.Control
             type="email"
             id="newEmail"
-            defaultValue={userData.email}
+            value={newUserData.email}
             autoComplete="email"
             onChange={(e) => handleChange("email", e.target.value)}
           />
@@ -65,7 +92,7 @@ export const ProfileEdit = ({
           <Form.Control
             type="date"
             id="newBirthday"
-            defaultValue={userData.birthday}
+            value={newUserData.birthday}
             autoComplete="bday"
             onChange={(e) => handleChange("birthday", e.target.value)}
           />
@@ -79,7 +106,7 @@ export const ProfileEdit = ({
           <PasswordField
             autocomplete={"new-password"}
             fieldID={"newPassword"}
-            fieldValue={""}
+            fieldValue={newUserData.password}
             onChange={(e) => handleChange("password", e.target.value)}
           />
         </Col>
@@ -87,11 +114,7 @@ export const ProfileEdit = ({
       <Button className="mb-3 w-100" type="submit">
         Save Changes
       </Button>
-      <Button
-        className="mb-3 w-100 btn-secondary"
-        type="submit"
-        onClick={handleDelete}
-      >
+      <Button className="mb-3 w-100 btn-secondary" onClick={handleDelete}>
         Delete Profile
       </Button>
     </Form>
@@ -106,13 +129,6 @@ ProfileEdit.propTypes = {
     birthday: PropTypes.instanceOf(Date),
     favorites: PropTypes.arrayOf(PropTypes.string),
   }),
-  newUserData: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string,
-    birthday: PropTypes.instanceOf(Date),
-    favorites: PropTypes.arrayOf(PropTypes.string),
-  }),
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
