@@ -13,7 +13,7 @@ export const ProfileEdit = ({
   const [newUserData, setNewUserData] = useState({
     name: userData.name,
     email: userData.email,
-    birthday: userData.birthday ? userData.birthday : "",
+    birthday: userData.birthday ? userData.birthday.substring(0, 10) : "",
     password: "",
   });
 
