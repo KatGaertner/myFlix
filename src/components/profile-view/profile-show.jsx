@@ -1,8 +1,8 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
 import PropTypes from "prop-types";
 
-export const ProfileShow = ({ userData }) => {
+export const ProfileShow = ({ userData, handleToggle }) => {
   const showBirthday = (datafield) => {
     if (datafield) {
       // the date has to be parsed as UTC, otherwise it might get pushed around based on local timezones
@@ -19,6 +19,11 @@ export const ProfileShow = ({ userData }) => {
 
   return (
     <>
+      <div className="d-flex mb-2">
+        <Button className="mb-2" variant="primary" onClick={handleToggle}>
+          Edit
+        </Button>
+      </div>
       <Row className="my-3">
         <Col sm={leftColumnWidth} className="">
           Username:

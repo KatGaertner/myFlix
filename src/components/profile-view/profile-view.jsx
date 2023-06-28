@@ -101,34 +101,19 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
     <>
       {!isEmpty(userData) && (
         <>
-          <h2 className="d-inline-block">Your profile </h2>
+          <h2 className="">Your profile </h2>
           {!isOnEdit && (
             <>
-              <Button
-                className="ms-3 mb-2"
-                variant="primary"
-                onClick={handleToggle}
-              >
-                Edit
-              </Button>
-
-              <ProfileShow userData={userData} />
+              <ProfileShow userData={userData} handleToggle={handleToggle} />
             </>
           )}
           {isOnEdit && (
             <>
-              <Button
-                className="ms-3 mb-2"
-                variant="secondary"
-                onClick={handleToggle}
-              >
-                Exit
-              </Button>
-
               <ProfileEdit
                 userData={userData}
                 handleUpdate={handleUpdate}
                 handleDelete={handleDelete}
+                handleToggle={handleToggle}
               />
             </>
           )}
