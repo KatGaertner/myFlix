@@ -51,7 +51,7 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
         }
       });
       if (newUserData.password) {
-        data.password = newPassword;
+        data.password = newUserData.password;
         console.log("Changed Password");
       }
 
