@@ -8,7 +8,7 @@ export const ProfileEdit = ({ userData, handleUpdate, handleDelete }) => {
   const [newUserData, setNewUserData] = useState({
     name: userData.name,
     email: userData.email,
-    birthday: userData.birthday,
+    birthday: userData.birthday ? userData.birthday : "",
     password: "",
   });
 
@@ -126,7 +126,7 @@ ProfileEdit.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    birthday: PropTypes.instanceOf(Date),
+    birthday: PropTypes.string,
     favorites: PropTypes.arrayOf(PropTypes.string),
   }),
   handleUpdate: PropTypes.func.isRequired,
