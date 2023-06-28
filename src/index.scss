@@ -1,5 +1,43 @@
-$color: #ee516b;
+$body-bg: #001220;
+$primary: #fbae3c;
+$secondary: #c0526aff;
+$body-color: lighten($primary, 30);
 
-.my-flix {
-  color: $color;
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-image: url('data:image/svg+xml,<svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"> <rect x="0" y="0" width="900" height="600" fill="%23001220"></rect> <path d="M0 449L21.5 449.5C43 450 86 451 128.8 459.7C171.7 468.3 214.3 484.7 257.2 491.8C300 499 343 497 385.8 500.5C428.7 504 471.3 513 514.2 507C557 501 600 480 642.8 481C685.7 482 728.3 505 771.2 504C814 503 857 478 878.5 465.5L900 453L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z" fill="%23683a67"></path> <path d="M0 489L21.5 498.8C43 508.7 86 528.3 128.8 522.8C171.7 517.3 214.3 486.7 257.2 476.2C300 465.7 343 475.3 385.8 478.7C428.7 482 471.3 479 514.2 489C557 499 600 522 642.8 532.7C685.7 543.3 728.3 541.7 771.2 533.3C814 525 857 510 878.5 502.5L900 495L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z" fill="%23b34c6d"></path> <path d="M0 547L21.5 542.2C43 537.3 86 527.7 128.8 523C171.7 518.3 214.3 518.7 257.2 522.3C300 526 343 533 385.8 538.8C428.7 544.7 471.3 549.3 514.2 543.7C557 538 600 522 642.8 516C685.7 510 728.3 514 771.2 521.8C814 529.7 857 541.3 878.5 547.2L900 553L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z" fill="%23ea7159"></path> <path d="M0 551L21.5 550.2C43 549.3 86 547.7 128.8 550.8C171.7 554 214.3 562 257.2 561.3C300 560.7 343 551.3 385.8 545.2C428.7 539 471.3 536 514.2 537.8C557 539.7 600 546.3 642.8 547C685.7 547.7 728.3 542.3 771.2 538.5C814 534.7 857 532.3 878.5 531.2L900 530L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z" fill="%23fbae3c"></path></svg>');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Comfortaa", cursive;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  grid-gap: 10px;
+
+  div {
+    min-width: 100%;
+    float: none;
+    margin: 0;
+    border: none;
+  }
+}
+
+.card-img-top {
+  height: 8em;
+  object-fit: cover;
+  display: block;
+  width: 100%;
 }

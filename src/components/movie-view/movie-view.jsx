@@ -1,29 +1,26 @@
 import PropTypes from "prop-types";
+import { Col, Row, Button } from "react-bootstrap";
 
 export const MovieView = ({ movieData, onBackClick }) => {
   return (
-    <div>
-      <div>
-        <img src={movieData.imageURL} />
-      </div>
-      <div>
-        <span>Title: </span>
-        <span>{movieData.title}</span>
-      </div>
-      <div>
-        <span>Director: </span>
-        <span>{movieData.directors[0].name}</span>
-      </div>
-      <div>
-        <span>Summary: </span>
-        <span>{movieData.summary}</span>
-      </div>
-      <div>
-        <span>Genres: </span>
-        <span>{movieData.genres[0].name}</span>
-      </div>
-      <button onClick={onBackClick}>Go back</button>
-    </div>
+    <Row className="rounded-4 bg-body">
+      <Col sm={{ span: 4, order: "last" }}>
+        <img className="w-100 d-none d-sm-block" src={movieData.imageURL} />
+      </Col>
+      <Col className="d-flex flex-column justify-content-between">
+        <div>
+          <h1>{movieData.title}</h1>
+          <h2>{movieData.directors[0].name}</h2>
+          <div>{movieData.summary}</div>
+          <div className="text-end">{movieData.genres[0].name}</div>
+        </div>
+        <div>
+          <Button className="mb-3" type="link" onClick={onBackClick}>
+            Go back
+          </Button>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
