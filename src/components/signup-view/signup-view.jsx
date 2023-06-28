@@ -89,7 +89,7 @@ export const SignupView = () => {
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
             <Form.Text id="usernameText">
               Usernames must have at least 5 characters and use only
-              alphanumeric characters.{" "}
+              alphanumeric characters.
             </Form.Text>
           </Col>
           <Form.Control.Feedback></Form.Control.Feedback>
