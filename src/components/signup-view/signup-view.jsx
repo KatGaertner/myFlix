@@ -3,12 +3,14 @@ import { Col, Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
+import { useNavigate } from "react-router-dom";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const navigate = useNavigate();
 
   // layout
   const leftColumnWidth = 4;
@@ -33,6 +35,7 @@ export const SignupView = () => {
         .then((response) => {
           if (response.ok) {
             alert("Successfully signed up!");
+            navigate("/login");
           } else {
             let contentType = response.headers.get("content-type");
             if (contentType.includes("text/html")) {
