@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { MoviesFilter } from "../movies-filter/movies-filter";
+import { deleteCookie } from "../../utils/cookies";
 
 export const NavigationBar = () => {
   const token = useSelector((state) => state.userData.token);
@@ -52,7 +53,7 @@ export const NavigationBar = () => {
                 onClick={() => {
                   dispatch(setUserData({}));
                   dispatch(setUserToken(""));
-                  localStorage.clear();
+                  deleteCookie("token");
                 }}
               >
                 <span style={{ fontFamily: "'Comfortaa', cursive" }}>

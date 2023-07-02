@@ -14,11 +14,12 @@ import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
+import { getCookie } from "../../utils/cookies";
 
 export const MainView = () => {
-  const storedToken = localStorage.getItem("token");
   const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
+  const storedToken = getCookie("token");
 
   // if a token is stored, but the userData state is empty, get userData from API
   useEffect(() => {

@@ -8,6 +8,7 @@ import { API } from "../../utils/links";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData, setUserToken } from "../../redux/reducers/userData";
+import { deleteCookie } from "../../utils/cookies";
 
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -86,7 +87,7 @@ export const ProfileView = () => {
           alert(message);
           dispatch(setUserData({}));
           dispatch(setUserToken(""));
-          localStorage.clear();
+          deleteCookie("token");
         })
         .catch(() => {
           alert("Something went wrong.");
