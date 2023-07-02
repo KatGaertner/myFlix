@@ -131,13 +131,7 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
 };
 
 ProfileEdit.propTypes = {
-  userData: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string,
-    favorites: PropTypes.arrayOf(PropTypes.string),
-  }),
   handleUpdate: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  handleToggle: PropTypes.func.isRequired,
 };

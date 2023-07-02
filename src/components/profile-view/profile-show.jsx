@@ -50,11 +50,5 @@ export const ProfileShow = ({ handleToggle }) => {
 };
 
 ProfileShow.propTypes = {
-  userData: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string,
-    favorites: PropTypes.arrayOf(PropTypes.string),
-  }),
+  handleToggle: PropTypes.func.isRequired,
 };

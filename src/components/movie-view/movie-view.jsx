@@ -1,4 +1,3 @@
-import { moviesType } from "../../utils/types";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { FavButton } from "../fav-button/fav-button";
@@ -9,7 +8,6 @@ import { useSelector } from "react-redux";
 
 export const MovieView = () => {
   const movies = useSelector((state) => state.movies.list);
-
   const { movieID } = useParams();
   const movieData = movies.find((movie) => movie.id === movieID);
 

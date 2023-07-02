@@ -1,11 +1,8 @@
-import { moviesType } from "../../utils/types";
-import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { deleteCookie } from "../../utils/cookies";
@@ -108,7 +105,6 @@ export const ProfileView = () => {
           {isOnEdit && (
             <>
               <ProfileEdit
-                userData={userData.data}
                 handleUpdate={handleUpdate}
                 handleDelete={handleDelete}
                 handleToggle={handleToggle}

@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { setCookie } from "../../utils/cookies";
 
@@ -65,7 +64,7 @@ export const LoginView = () => {
         />
         <PasswordField
           className={"mb-2"}
-          fieldID={"newPassword"}
+          fieldID={"Password"}
           fieldPlaceholder={"Password"}
           fieldValue={password}
           onChange={(e) => setPassword(e.target.value)}

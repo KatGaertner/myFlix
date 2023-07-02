@@ -1,7 +1,6 @@
 import { moviesType } from "../../utils/types";
 import { MovieCard } from "../movie-card/movie-card";
 import { useSelector } from "react-redux";
-import { MoviesFilter } from "../movies-filter/movies-filter";
 
 export const MovieGrid = ({
   movies = useSelector((state) => state.movies.list),

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -20,6 +20,7 @@ export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
   const storedToken = getCookie("token");
+  const dispatch = useDispatch();
 
   // if a token is stored, but the userData state is empty, get userData from API
   useEffect(() => {
@@ -48,7 +49,6 @@ export const MainView = () => {
           }
         })
         .then((data) => {
-          console.log("data from request", data);
           dispatch(setUserData(data));
           dispatch(setUserToken(storedToken));
         })
@@ -58,8 +58,7 @@ export const MainView = () => {
     }
   }, []);
 
-  const dispatch = useDispatch();
-
+  // if the token and user are there, fetch the movie list
   useEffect(() => {
     // only fetch list when token is there
     if (!userData.token) {
@@ -146,7 +145,7 @@ export const MainView = () => {
                   <NoDataInfo />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <DirectorView movies={movies} />
+                    <DirectorView />
                   </Col>
                 )}
               </>
@@ -162,7 +161,7 @@ export const MainView = () => {
                   <NoDataInfo />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <GenreView movies={movies} />
+                    <GenreView />
                   </Col>
                 )}
               </>

@@ -10,6 +10,7 @@ export const MoviesFilter = () => {
   return (
     <Form.Control
       type="text"
+      id="movies-filter"
       aria-label="Filter movies"
       placeholder="Filter movies..."
       value={filter}
