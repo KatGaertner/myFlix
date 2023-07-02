@@ -11,7 +11,12 @@ import { setCookie } from "../../utils/cookies";
 export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
   const dispatch = useDispatch();
+
+  const handleCheck = () => {
+    setRememberMe(!rememberMe);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault(); // because default is reloading the entire page
@@ -29,9 +34,11 @@ export const LoginView = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.userData) {
-          setCookie("token", data.token, 7);
           dispatch(setUserData(data.userData));
           dispatch(setUserToken(data.token));
+          if (rememberMe) {
+            setCookie("token", data.token, 7);
+          }
         } else {
           alert(data.info.message);
         }
@@ -70,7 +77,8 @@ export const LoginView = () => {
           type="checkbox"
           id="keepLogInCheck"
           label="Keep me logged in"
-          defaultChecked={true}
+          checked={rememberMe}
+          onChange={handleCheck}
         />
         <Button className="mb-3 w-100" type="submit">
           Log in
