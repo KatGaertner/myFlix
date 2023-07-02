@@ -7,13 +7,12 @@ import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../../redux/reducers/userData";
+import { setUserData, setUserToken } from "../../redux/reducers/userData";
 
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.list);
   const [isOnEdit, setOnEdit] = useState(false);
   const userData = useSelector((state) => state.userData);
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
   const isEmpty = (obj) => {
@@ -30,10 +29,10 @@ export const ProfileView = () => {
 
   const handleUpdate = (data) => {
     if (!isEmpty(data)) {
-      fetch(`${API}/users/${userData._id}`, {
+      fetch(`${API}/users/${userData.data._id}`, {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -69,10 +68,10 @@ export const ProfileView = () => {
     let response = confirm("Are you sure you want to delete your profile?");
 
     if (response) {
-      fetch(`${API}/users/${userData._id}`, {
+      fetch(`${API}/users/${userData.data._id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
           "Content-Type": "application/json",
         },
       })
@@ -86,6 +85,7 @@ export const ProfileView = () => {
         .then((message) => {
           alert(message);
           dispatch(setUserData({}));
+          dispatch(setUserToken(""));
           localStorage.clear();
         })
         .catch(() => {
@@ -107,7 +107,7 @@ export const ProfileView = () => {
           {isOnEdit && (
             <>
               <ProfileEdit
-                userData={userData}
+                userData={userData.data}
                 handleUpdate={handleUpdate}
                 handleDelete={handleDelete}
                 handleToggle={handleToggle}
@@ -117,7 +117,7 @@ export const ProfileView = () => {
           <h2>Your favorites</h2>
           <MovieGrid
             movies={movies.filter((movie) =>
-              userData.favorites.includes(movie.id)
+              userData.data.favorites.includes(movie.id)
             )}
           />
         </>

@@ -1,11 +1,11 @@
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "../../redux/reducers/userData";
+import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { MoviesFilter } from "../movies-filter/movies-filter";
 
 export const NavigationBar = () => {
-  const userData = useSelector((state) => state.userData);
+  const token = useSelector((state) => state.userData.token);
   const dispatch = useDispatch();
 
   return (
@@ -28,7 +28,7 @@ export const NavigationBar = () => {
       <Navbar.Toggle aria-controls="navbar" />
       <Navbar.Collapse id="navbar">
         <Nav className="w-100 d-flex align-items-baseline">
-          {!userData ? (
+          {!token ? (
             <>
               <Nav.Link as={Link} to="/login">
                 Log in
@@ -51,6 +51,7 @@ export const NavigationBar = () => {
                 className="btn mx-3 ms-auto"
                 onClick={() => {
                   dispatch(setUserData({}));
+                  dispatch(setUserToken(""));
                   localStorage.clear();
                 }}
               >

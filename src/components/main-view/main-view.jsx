@@ -10,32 +10,63 @@ import { NoDataInfo } from "./noData-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
+import { setUserData, setUserToken } from "../../redux/reducers/userData";
 import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 
 export const MainView = () => {
   const storedToken = localStorage.getItem("token");
-  const [token, setToken] = useState(storedToken ? storedToken : null);
   const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
 
-  const loggedIn = () => (Object.keys(userData).length === 0 ? false : true);
-
+  // if a token is stored, but the userData state is empty, get userData from API
   useEffect(() => {
-    console.log(userData);
+    if (storedToken && !userData.token) {
+      fetch(`${API}/users/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            let contentType = response.headers.get("content-type");
+            if (contentType.includes("text/html")) {
+              response.text().then((info) => alert(info));
+              throw "Error";
+            } else if (contentType.includes("application/json")) {
+              response.json().then((info) => {
+                alert(info.errors.map((e) => e.msg).join("\n"));
+              });
+              throw "Error";
+            }
+          }
+        })
+        .then((data) => {
+          console.log("data from request", data);
+          dispatch(setUserData(data));
+          dispatch(setUserToken(storedToken));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, []);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     // only fetch list when token is there
-    if (!token) {
+    if (!userData.token) {
       return;
     }
 
     fetch(`${API}/movies`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${userData.token}` },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -53,7 +84,7 @@ export const MainView = () => {
         dispatch(setMovies(moviesFromAPI));
       })
       .catch((error) => console.error(error));
-  }, [token]);
+  }, [userData.token]);
 
   return (
     <BrowserRouter>
@@ -64,7 +95,7 @@ export const MainView = () => {
             path="/signup"
             element={
               <>
-                {loggedIn() ? (
+                {userData.token ? (
                   <Navigate to="/" />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
@@ -78,7 +109,7 @@ export const MainView = () => {
             path="/login"
             element={
               <>
-                {loggedIn() ? (
+                {userData.token ? (
                   <Navigate to="/" />
                 ) : (
                   <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
@@ -92,7 +123,7 @@ export const MainView = () => {
             path="/movies/:movieID"
             element={
               <>
-                {!loggedIn() ? (
+                {!userData.token ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -108,7 +139,7 @@ export const MainView = () => {
             path="/directors/:directorName"
             element={
               <>
-                {!loggedIn() ? (
+                {!userData.token ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -124,7 +155,7 @@ export const MainView = () => {
             path="/genres/:genreName"
             element={
               <>
-                {!loggedIn() ? (
+                {!userData.token ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -140,7 +171,7 @@ export const MainView = () => {
             path="/"
             element={
               <>
-                {!loggedIn() ? (
+                {!userData.token ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <NoDataInfo />
@@ -156,7 +187,7 @@ export const MainView = () => {
             path="/profile"
             element={
               <>
-                {!loggedIn() ? (
+                {!userData.token ? (
                   <Navigate to="/login" replace />
                 ) : (
                   <Col sm={10} md={8} lg={6} className="bg-body rounded-4">

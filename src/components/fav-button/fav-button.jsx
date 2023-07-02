@@ -7,12 +7,11 @@ import { setUserData } from "../../redux/reducers/userData";
 
 export const FavButton = ({ movieID }) => {
   const userData = useSelector((state) => state.userData);
-  const token = localStorage.getItem("token");
   const [isFavorited, setFavorited] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userData.favorites.includes(movieID)) {
+    if (userData.data.favorites.includes(movieID)) {
       setFavorited(true);
     } else {
       setFavorited(false);
@@ -21,24 +20,28 @@ export const FavButton = ({ movieID }) => {
 
   const toggleFavorited = () => {
     if (!isFavorited) {
-      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData.data._id}/movies/${movieID}`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       })
         .then((response) => response.text())
         .then((data) => {
-          dispatch(setUserData({ ...userData, favorites: JSON.parse(data) }));
+          dispatch(
+            setUserData({ ...userData.data, favorites: JSON.parse(data) })
+          );
           setFavorited(true);
         })
         .catch((error) => console.error(error));
     } else if (isFavorited) {
-      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData.data._id}/movies/${movieID}`, {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       })
         .then((response) => response.text())
         .then((data) => {
-          dispatch(setUserData({ ...userData, favorites: JSON.parse(data) }));
+          dispatch(
+            setUserData({ ...userData.data, favorites: JSON.parse(data) })
+          );
           setFavorited(false);
         })
         .catch((error) => console.error(error));

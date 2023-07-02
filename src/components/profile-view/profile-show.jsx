@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 export const ProfileShow = ({ handleToggle }) => {
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.userData.data);
 
   const showBirthday = (datafield) => {
     if (datafield) {

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "../../redux/reducers/userData";
+import { setUserData, setUserToken } from "../../redux/reducers/userData";
 
 export const LoginView = () => {
   const [username, setUsername] = useState("");
@@ -30,6 +30,7 @@ export const LoginView = () => {
         if (data.userData) {
           localStorage.setItem("token", data.token);
           dispatch(setUserData(data.userData));
+          dispatch(setUserToken(data.token));
         } else {
           alert(data.info.message);
         }
