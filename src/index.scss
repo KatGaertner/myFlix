@@ -8,6 +8,7 @@ $body-color: lighten($primary, 30);
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 @import "~bootstrap/scss/bootstrap.scss";
+@import "./components/movies-filter/movies-filter.scss";
 
 body {
   font-family: "Roboto", sans-serif;
@@ -46,4 +47,9 @@ h3 {
 .container-fluid {
   padding-left: 0;
   padding-right: 0;
+}
+
+// to make the calendar picker symbol on chrome light
+input {
+  color-scheme: dark;
 }
