@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -7,6 +7,7 @@ import { Col, Row } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { NoDataInfo } from "./noData-info";
+import { LoadingInfo } from "./loading-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
@@ -15,11 +16,13 @@ import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { getCookie } from "../../utils/cookies";
+import { useState } from "react";
 
 export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
   const storedToken = getCookie("token");
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   // if a token is stored, but the userData state is empty, get userData from API
@@ -54,7 +57,10 @@ export const MainView = () => {
         })
         .catch((error) => {
           console.error(error);
+          setIsLoading(false);
         });
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
@@ -82,123 +88,133 @@ export const MainView = () => {
           };
         });
         dispatch(setMovies(moviesFromAPI));
+        setIsLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   }, [userData.token]);
 
   return (
-    <BrowserRouter>
-      <NavigationBar />
-      <Row className="justify-content-center g-0 p-sm-4">
-        <Routes>
-          <Route
-            path="/signup"
-            element={
-              <>
-                {userData.token ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
-                    <SignupView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                {userData.token ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
-                    <LoginView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/movies/:movieID"
-            element={
-              <>
-                {!userData.token ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <NoDataInfo />
-                ) : (
-                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <MovieView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/directors/:directorName"
-            element={
-              <>
-                {!userData.token ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <NoDataInfo />
-                ) : (
-                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <DirectorView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/genres/:genreName"
-            element={
-              <>
-                {!userData.token ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <NoDataInfo />
-                ) : (
-                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <GenreView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <>
-                {!userData.token ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <NoDataInfo />
-                ) : (
-                  <Col md={10} lg={8} className="bg-body rounded-4 p-2">
-                    <MovieGrid />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <>
-                {!userData.token ? (
-                  <Navigate to="/login" replace />
-                ) : (
-                  <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
-                    <ProfileView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-        </Routes>
-      </Row>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <NavigationBar isLoading={isLoading} />
+        <Row className="justify-content-center g-0 p-sm-4">
+          {isLoading ? (
+            <LoadingInfo />
+          ) : (
+            <Routes>
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    {userData.token ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
+                        <SignupView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <>
+                    {userData.token ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
+                        <LoginView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/movies/:movieID"
+                element={
+                  <>
+                    {!userData.token ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <NoDataInfo />
+                    ) : (
+                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                        <MovieView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/directors/:directorName"
+                element={
+                  <>
+                    {!userData.token ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <NoDataInfo />
+                    ) : (
+                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                        <DirectorView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/genres/:genreName"
+                element={
+                  <>
+                    {!userData.token ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <NoDataInfo />
+                    ) : (
+                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                        <GenreView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <>
+                    {!userData.token ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <NoDataInfo />
+                    ) : (
+                      <Col md={10} lg={8} className="bg-body rounded-4 p-2">
+                        <MovieGrid />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <>
+                    {!userData.token ? (
+                      <Navigate to="/login" replace />
+                    ) : (
+                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                        <ProfileView />
+                      </Col>
+                    )}
+                  </>
+                }
+              />
+            </Routes>
+          )}
+        </Row>
+      </BrowserRouter>
+    </>
   );
 };
