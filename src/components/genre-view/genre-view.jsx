@@ -1,12 +1,14 @@
-import { moviesType } from "../../utils/types";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { BackButton } from "../back-button/back-button";
 import { useEffect, useState } from "react";
 import { API } from "../../utils/links";
 import { MovieGrid } from "../movie-grid/movie-grid";
+import { useSelector } from "react-redux";
 
-export const GenreView = ({ movies }) => {
+export const GenreView = () => {
+  const movies = useSelector((state) => state.movies.list);
+  const token = useSelector((state) => state.userData.token);
   const { genreName } = useParams();
   const [genreData, setgenreData] = useState({});
   const genreMovies = movies.filter(
@@ -14,7 +16,6 @@ export const GenreView = ({ movies }) => {
   );
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
     fetch(`${API}/genres/${genreName}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -45,8 +46,4 @@ export const GenreView = ({ movies }) => {
       </div>
     </div>
   );
-};
-
-GenreView.propTypes = {
-  movies: moviesType.isRequired,
 };

@@ -1,12 +1,14 @@
-import { moviesType } from "../../utils/types";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { BackButton } from "../back-button/back-button";
 import { useEffect, useState } from "react";
 import { API } from "../../utils/links";
 import { MovieGrid } from "../movie-grid/movie-grid";
+import { useSelector } from "react-redux";
 
-export const DirectorView = ({ movies }) => {
+export const DirectorView = () => {
+  const movies = useSelector((state) => state.movies.list);
+  const token = useSelector((state) => state.userData.token);
   const { directorName } = useParams();
   const [directorData, setDirectorData] = useState({});
   const directorMovies = movies.filter(
@@ -14,7 +16,6 @@ export const DirectorView = ({ movies }) => {
   );
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
     fetch(`${API}/directors/${directorName}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -52,8 +53,4 @@ export const DirectorView = ({ movies }) => {
       </div>
     </div>
   );
-};
-
-DirectorView.propTypes = {
-  movies: moviesType.isRequired,
 };
