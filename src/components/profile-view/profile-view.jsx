@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../redux/reducers/userData";
 
-export const ProfileView = ({ onLoggedOut }) => {
+export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.list);
   const [isOnEdit, setOnEdit] = useState(false);
   const userData = useSelector((state) => state.userData);
@@ -124,8 +124,4 @@ export const ProfileView = ({ onLoggedOut }) => {
       )}
     </>
   );
-};
-
-ProfileView.propTypes = {
-  onLoggedOut: PropTypes.func.isRequired,
 };
