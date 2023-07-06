@@ -9,11 +9,8 @@ export const FavButton = ({ movieID }) => {
   const [isFavorited, setFavorited] = useState(false);
 
   useEffect(() => {
-    if (userData.favorites.includes(movieID)) {
-      setFavorited(true);
-    } else {
-      setFavorited(false);
-    }
+    const isFavoriteMovie = userData.favorites.includes(movieID);
+    setFavorited(isFavoriteMovie);
   }, [movieID]);
 
   const toggleFavorited = () => {
