@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
 import { useDispatch } from "react-redux";
-import { setUserData, setUserToken } from "../../redux/reducers/userData";
+import { loginUser } from "../../redux/reducers/userData";
 import { setCookie } from "../../utils/cookies";
 
 export const LoginView = () => {
@@ -33,8 +33,7 @@ export const LoginView = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.userData) {
-          dispatch(setUserData(data.userData));
-          dispatch(setUserToken(data.token));
+          dispatch(loginUser(data));
           if (rememberMe) {
             setCookie("token", data.token, 7);
           }

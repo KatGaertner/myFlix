@@ -1,7 +1,7 @@
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData, setUserToken } from "../../redux/reducers/userData";
+import { logoutUser } from "../../redux/reducers/userData";
 import { MoviesFilter } from "../movies-filter/movies-filter";
 import { deleteCookie } from "../../utils/cookies";
 import PropTypes from "prop-types";
@@ -56,8 +56,7 @@ export const NavigationBar = ({ isLoading }) => {
                     variant="outline-dark"
                     className="btn mx-3 ms-auto"
                     onClick={() => {
-                      dispatch(setUserData({}));
-                      dispatch(setUserToken(""));
+                      dispatch(logoutUser());
                       deleteCookie("token");
                     }}
                   >

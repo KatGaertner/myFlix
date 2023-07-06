@@ -11,7 +11,7 @@ import { LoadingInfo } from "./loading-info";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
-import { setUserData, setUserToken } from "../../redux/reducers/userData";
+import { loginUser } from "../../redux/reducers/userData";
 import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
@@ -52,8 +52,12 @@ export const MainView = () => {
           }
         })
         .then((data) => {
-          dispatch(setUserData(data));
-          dispatch(setUserToken(storedToken));
+          dispatch(
+            loginUser({
+              userData: data,
+              token: storedToken,
+            })
+          );
         })
         .catch((error) => {
           console.error(error);

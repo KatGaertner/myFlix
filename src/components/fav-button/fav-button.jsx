@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API } from "../../utils/links";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "../../redux/reducers/userData";
+import { setUserFavorites } from "../../redux/reducers/userData";
 
 export const FavButton = ({ movieID }) => {
   const userData = useSelector((state) => state.userData);
@@ -23,9 +23,8 @@ export const FavButton = ({ movieID }) => {
       })
         .then((response) => response.text())
         .then((data) => {
-          dispatch(
-            setUserData({ ...userData.data, favorites: JSON.parse(data) })
-          );
+          console.log(JSON.parse(data));
+          dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(true);
         })
         .catch((error) => console.error(error));
@@ -36,9 +35,8 @@ export const FavButton = ({ movieID }) => {
       })
         .then((response) => response.text())
         .then((data) => {
-          dispatch(
-            setUserData({ ...userData.data, favorites: JSON.parse(data) })
-          );
+          console.log(JSON.parse(data));
+          dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(false);
         })
         .catch((error) => console.error(error));

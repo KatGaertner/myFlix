@@ -4,7 +4,7 @@ import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData, setUserToken } from "../../redux/reducers/userData";
+import { setUserData, logoutUser } from "../../redux/reducers/userData";
 import { deleteCookie } from "../../utils/cookies";
 
 export const ProfileView = () => {
@@ -82,8 +82,7 @@ export const ProfileView = () => {
         })
         .then((message) => {
           alert(message);
-          dispatch(setUserData({}));
-          dispatch(setUserToken(""));
+          dispatch(logoutUser());
           deleteCookie("token");
         })
         .catch(() => {
