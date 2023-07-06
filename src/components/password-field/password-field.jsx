@@ -15,11 +15,8 @@ export const PasswordField = ({
   const [passwordFieldType, setPasswordFieldType] = useState("password");
 
   const togglePasswordFieldType = () => {
-    if (passwordFieldType === "password") {
-      setPasswordFieldType("text");
-    } else {
-      setPasswordFieldType("password");
-    }
+     const fieldType = passwordFieldType === "password" ? "password": "text";
+      setPasswordFieldType(fieldType);
   };
 
   return (

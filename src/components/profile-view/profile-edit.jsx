@@ -28,12 +28,10 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
       ["name", "email", "birthday"].forEach((key) => {
         if (newUserData[key] && newUserData[key] !== userData[key]) {
           update[key] = newUserData[key];
-          console.log("Changed " + key);
         }
       });
       if (newUserData.password) {
         update.password = newUserData.password;
-        console.log("Changed Password");
       }
     }
     handleUpdate(update);
