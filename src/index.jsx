@@ -12,7 +12,7 @@ const container = document.querySelector("#root");
 const root = createRoot(container);
 
 root.render(
-  <Container>
+  <Container fluid>
     <MyFlixApp />
   </Container>
 );

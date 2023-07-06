@@ -1,6 +1,7 @@
 $body-bg: #001220;
 $primary: #fbae3c;
 $secondary: #c0526aff;
+$tertiary: #683a67;
 $body-color: lighten($primary, 30);
 
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap");
@@ -40,4 +41,9 @@ h3 {
   object-fit: cover;
   display: block;
   width: 100%;
+}
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }

@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FavButton } from "../fav-button/fav-button";
 
-export const MovieCard = ({ movieData, onMovieClick }) => {
+export const MovieCard = ({ movieData }) => {
   return (
     <Card className="h-100">
       <Card.Img variant="top" src={movieData.imageURL} />
@@ -10,10 +12,11 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
           <Card.Title>{movieData.title}</Card.Title>
           <Card.Text>{movieData.directors[0].name}</Card.Text>
         </div>
-        <div className="text-end">
-          <Button onClick={() => onMovieClick(movieData)} variant="link">
-            See more
-          </Button>
+        <div className="d-flex flex-row justify-content-between">
+          <FavButton movieID={movieData.id} />
+          <Link to={`/movies/${movieData.id}`}>
+            <Button variant="link">See more</Button>
+          </Link>
         </div>
       </Card.Body>
     </Card>
@@ -23,12 +26,20 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
 MovieCard.propTypes = {
   movieData: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    summary: PropTypes.string,
     directors: PropTypes.arrayOf(
       PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       })
     ).isRequired,
     imageURL: PropTypes.string.isRequired,
+    featured: PropTypes.bool.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };

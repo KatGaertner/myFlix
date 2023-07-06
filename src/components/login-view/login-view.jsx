@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { PasswordField } from "../password-field/password-field";
+import { API } from "../../utils/links";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -14,7 +17,7 @@ export const LoginView = ({ onLoggedIn }) => {
       password: password,
     };
 
-    fetch("https://movie-api-93299-83ca7447ffdb.herokuapp.com/login", {
+    fetch(`${API}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -36,7 +39,7 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <div className="p-4 rounded-4 bg-body">
+    <div className="p-4">
       <h1 className="text-center">Log in</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Control
@@ -46,16 +49,17 @@ export const LoginView = ({ onLoggedIn }) => {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete="username"
           required
         />
-        <Form.Control
-          className="mb-2"
-          type="password"
-          id="password"
-          placeholder="Password"
-          value={password}
+        <PasswordField
+          className={"mb-2"}
+          fieldID={"newPassword"}
+          fieldPlaceholder={"Password"}
+          fieldValue={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
+          autocomplete={"current-password"}
+          required={true}
         />
         <Form.Check
           className="mb-2 mx-1"
@@ -65,9 +69,17 @@ export const LoginView = ({ onLoggedIn }) => {
           defaultChecked={true}
         />
         <Button className="mb-3 w-100" type="submit">
-          Login
+          Log in
         </Button>
       </Form>
+      <div className="d-flex justify-content-between rounded-4 bg-body">
+        <hr className="flex-grow-1" />
+        <span className="mx-3"> or </span>
+        <hr className="flex-grow-1" />
+      </div>
+      <Link to="/signup">
+        <Button className="btn-secondary w-100 mt-3">Sign up</Button>
+      </Link>
     </div>
   );
 };

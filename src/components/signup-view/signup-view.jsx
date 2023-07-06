@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Col, Button, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { PasswordField } from "../password-field/password-field";
+import { API } from "../../utils/links";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +15,7 @@ export const SignupView = () => {
   const rightColumnWidth = 12 - leftColumnWidth;
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // because default is reloading the entire page
+    event.preventDefault();
 
     const data = {
       name: username,
@@ -22,7 +25,7 @@ export const SignupView = () => {
     };
 
     if (event.target.reportValidity()) {
-      fetch(`https://movie-api-93299-83ca7447ffdb.herokuapp.com/users`, {
+      fetch(`${API}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -49,7 +52,7 @@ export const SignupView = () => {
   };
 
   return (
-    <div className="p-4 rounded-4 bg-body">
+    <div className="p-4">
       <h1 className="text-center">Sign up</h1>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3" as={Row}>
@@ -68,6 +71,7 @@ export const SignupView = () => {
               aria-describedby="usernameText"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
               required
               minLength={5}
               pattern="^[a-zA-Z0-9]*$"
@@ -85,7 +89,7 @@ export const SignupView = () => {
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
             <Form.Text id="usernameText">
               Usernames must have at least 5 characters and use only
-              alphanumeric characters.{" "}
+              alphanumeric characters.
             </Form.Text>
           </Col>
           <Form.Control.Feedback></Form.Control.Feedback>
@@ -100,6 +104,7 @@ export const SignupView = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               required
             />
           </Col>
@@ -114,6 +119,7 @@ export const SignupView = () => {
               id="birthday"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
+              autoComplete="bday"
             />
           </Col>
         </Form.Group>
@@ -122,14 +128,13 @@ export const SignupView = () => {
             Password:*
           </Form.Label>
           <Col sm={rightColumnWidth}>
-            <Form.Control
-              type="password"
-              id="password"
-              aria-describedby="passwordText"
-              value={password}
+            <PasswordField
+              fieldID={"password"}
+              fieldValue={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={8}
+              required={true}
+              ariaDescribedby={"passwordText"}
+              autocomplete="new-password"
             />
           </Col>
           <Col sm={{ span: rightColumnWidth, offset: leftColumnWidth }}>
@@ -142,6 +147,14 @@ export const SignupView = () => {
           Submit
         </Button>
       </Form>
+      <div className="d-flex justify-content-between rounded-4 bg-body">
+        <hr className="flex-grow-1" />
+        <span className="mx-3"> or </span>
+        <hr className="flex-grow-1" />
+      </div>
+      <Link to="/login">
+        <Button className="btn-secondary w-100 mt-3">Log in</Button>
+      </Link>
     </div>
   );
 };
