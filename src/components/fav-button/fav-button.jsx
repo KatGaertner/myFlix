@@ -27,7 +27,6 @@ export const FavButton = ({ movieID }) => {
           return response.text();
         })
         .then((data) => {
-          console.log(JSON.parse(data));
           dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(true);
         })
@@ -42,7 +41,6 @@ export const FavButton = ({ movieID }) => {
           return response.text();
         })
         .then((data) => {
-          console.log(JSON.parse(data));
           dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(false);
         })
