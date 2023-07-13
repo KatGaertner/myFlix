@@ -15,13 +15,12 @@ import { loginUser } from "../../redux/reducers/userData";
 import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
-import { getCookie } from "../../utils/cookies";
 import { useState } from "react";
 
 export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
   const userData = useSelector((state) => state.userData);
-  const storedToken = getCookie("token");
+  const storedToken = localStorage.getItem("token");
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 

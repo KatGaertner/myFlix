@@ -5,7 +5,6 @@ import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/reducers/userData";
-import { setCookie } from "../../utils/cookies";
 
 export const LoginView = () => {
   const [username, setUsername] = useState("");
@@ -35,7 +34,7 @@ export const LoginView = () => {
         if (data.userData) {
           dispatch(loginUser(data));
           if (rememberMe) {
-            setCookie("token", data.token, 7);
+            localStorage.setItem("token", data.token);
           }
         } else {
           alert(data.info.message);

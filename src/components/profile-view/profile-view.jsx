@@ -5,7 +5,6 @@ import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData, logoutUser } from "../../redux/reducers/userData";
-import { deleteCookie } from "../../utils/cookies";
 import "./profile.scss";
 
 export const ProfileView = () => {
@@ -84,7 +83,6 @@ export const ProfileView = () => {
         .then((message) => {
           alert(message);
           dispatch(logoutUser());
-          deleteCookie("token");
         })
         .catch(() => {
           alert("Something went wrong.");
