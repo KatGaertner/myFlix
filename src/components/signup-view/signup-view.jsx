@@ -55,7 +55,7 @@ export const SignupView = () => {
   };
 
   return (
-    <div className="p-4">
+    <>
       <h1 className="text-center">Sign up</h1>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3" as={Row}>
@@ -65,7 +65,7 @@ export const SignupView = () => {
             className="pe-5"
             htmlFor="username"
           >
-            Username:*
+            Username: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <Form.Control
@@ -99,7 +99,7 @@ export const SignupView = () => {
         </Form.Group>
         <Form.Group className="mb-3" as={Row}>
           <Form.Label column sm={leftColumnWidth} htmlFor="email">
-            E-Mail:*
+            E-Mail: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <Form.Control
@@ -128,7 +128,7 @@ export const SignupView = () => {
         </Form.Group>
         <Form.Group className="mb-3" as={Row}>
           <Form.Label column sm={leftColumnWidth} htmlFor="password">
-            Password:*
+            Password: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <PasswordField
@@ -158,6 +158,6 @@ export const SignupView = () => {
       <Link to="/login">
         <Button className="btn-secondary w-100 mt-3">Log in</Button>
       </Link>
-    </div>
+    </>
   );
 };

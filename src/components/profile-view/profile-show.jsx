@@ -22,28 +22,39 @@ export const ProfileShow = ({ handleToggle }) => {
 
   return (
     <>
-      <Row className="my-3">
-        <div className="d-flex mb-2">
-          <Button className="mb-2" variant="primary" onClick={handleToggle}>
-            Edit
-          </Button>
-        </div>
-        <Col sm={leftColumnWidth} className="">
+      <div className="d-flex button-container">
+        <Button className="" variant="primary" onClick={handleToggle}>
+          Edit
+        </Button>
+      </div>
+
+      <Row className="show-row">
+        <Col sm={leftColumnWidth} className="show-left">
           Username:
         </Col>
-        <Col sm={rightColumnWidth}>{userData.name}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {userData.name}
+        </Col>
       </Row>
-      <Row className="my-3">
-        <Col sm={leftColumnWidth} className="">
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left">
           E-Mail:
         </Col>
-        <Col sm={rightColumnWidth}>{userData.email}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {userData.email}
+        </Col>
       </Row>
-      <Row className="my-3">
-        <Col sm={leftColumnWidth} className="">
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left">
           Birthday:
         </Col>
-        <Col sm={rightColumnWidth}>{showBirthday(userData.birthday)}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {showBirthday(userData.birthday)}
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left" />
+        <Col sm={rightColumnWidth} className="show-right" />
       </Row>
     </>
   );

@@ -44,7 +44,11 @@ export const FavButton = ({ movieID }) => {
   };
 
   return (
-    <Button variant="link" className="p-0" onClick={() => toggleFavorited()}>
+    <Button
+      variant="link"
+      className="p-1 position-absolute top-0 end-0"
+      onClick={() => toggleFavorited()}
+    >
       {!isFavorited && (
         <img
           src={require("./fav-false.svg")}

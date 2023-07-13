@@ -24,10 +24,29 @@ h3 {
   font-family: "Comfortaa", cursive;
 }
 
+.nav-link {
+  font-size: 13pt;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(0,0,0, 0.6)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+.reset-btn {
+  font-size: 16pt;
+  line-height: 10%;
+}
+
+.content-container {
+  @extend .rounded-4;
+  @extend .bg-body;
+  @extend .p-4;
+}
+
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
+  grid-gap: $spacer * 1.5;
 
   div {
     min-width: 100%;

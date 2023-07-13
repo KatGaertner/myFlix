@@ -29,7 +29,7 @@ export const GenreView = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <>
       <Row>
         <Col className="d-flex flex-column justify-content-between">
           <h1>{genreData.name}</h1>
@@ -44,6 +44,6 @@ export const GenreView = () => {
         <p>Movies with the genre {genreData.name}:</p>
         <MovieGrid movies={genreMovies} />
       </div>
-    </div>
+    </>
   );
 };

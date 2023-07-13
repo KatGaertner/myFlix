@@ -5,19 +5,18 @@ import { FavButton } from "../fav-button/fav-button";
 
 export const MovieCard = ({ movieData }) => {
   return (
-    <Card className="h-100">
+    <Card className="h-100 bg-primary text-dark">
       <Card.Img variant="top" src={movieData.imageURL} />
       <Card.Body className="d-flex flex-column justify-content-between">
         <div>
           <Card.Title>{movieData.title}</Card.Title>
           <Card.Text>{movieData.directors[0].name}</Card.Text>
         </div>
-        <div className="d-flex flex-row justify-content-between">
-          <FavButton movieID={movieData.id} />
-          <Link to={`/movies/${movieData.id}`}>
-            <Button variant="link">See more</Button>
-          </Link>
-        </div>
+
+        <FavButton movieID={movieData.id} />
+        <Link to={`/movies/${movieData.id}`} className="text-dark ms-auto">
+          See more
+        </Link>
       </Card.Body>
     </Card>
   );

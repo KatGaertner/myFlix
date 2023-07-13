@@ -116,7 +116,7 @@ export const MainView = () => {
                     {userData.token ? (
                       <Navigate to="/" />
                     ) : (
-                      <Col sm={10} md={8} lg={6} className="rounded-4 bg-body">
+                      <Col sm={10} md={8} lg={6} className="content-container">
                         <SignupView />
                       </Col>
                     )}
@@ -130,7 +130,7 @@ export const MainView = () => {
                     {userData.token ? (
                       <Navigate to="/" />
                     ) : (
-                      <Col sm={8} md={6} lg={4} className="rounded-4 bg-body">
+                      <Col sm={8} md={6} lg={4} className="content-container">
                         <LoginView />
                       </Col>
                     )}
@@ -146,7 +146,7 @@ export const MainView = () => {
                     ) : movies.length === 0 ? (
                       <NoDataInfo />
                     ) : (
-                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                      <Col sm={10} md={8} lg={6} className="content-container">
                         <MovieView />
                       </Col>
                     )}
@@ -162,7 +162,7 @@ export const MainView = () => {
                     ) : movies.length === 0 ? (
                       <NoDataInfo />
                     ) : (
-                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                      <Col sm={10} md={8} lg={6} className="content-container">
                         <DirectorView />
                       </Col>
                     )}
@@ -178,7 +178,7 @@ export const MainView = () => {
                     ) : movies.length === 0 ? (
                       <NoDataInfo />
                     ) : (
-                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                      <Col sm={10} md={8} lg={6} className="content-container">
                         <GenreView />
                       </Col>
                     )}
@@ -194,7 +194,7 @@ export const MainView = () => {
                     ) : movies.length === 0 ? (
                       <NoDataInfo />
                     ) : (
-                      <Col md={10} lg={8} className="bg-body rounded-4 p-2">
+                      <Col md={10} lg={8} className="content-container">
                         <MovieGrid />
                       </Col>
                     )}
@@ -208,7 +208,7 @@ export const MainView = () => {
                     {!userData.token ? (
                       <Navigate to="/login" replace />
                     ) : (
-                      <Col sm={10} md={8} lg={6} className="bg-body rounded-4">
+                      <Col sm={10} md={8} lg={6} className="content-container">
                         <ProfileView />
                       </Col>
                     )}

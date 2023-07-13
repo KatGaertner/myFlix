@@ -29,7 +29,7 @@ export const DirectorView = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <>
       <Row>
         <Col className="d-flex flex-column justify-content-between">
           <h1>{directorData.name}</h1>
@@ -51,6 +51,6 @@ export const DirectorView = () => {
         <p>Movies by {directorData.name}:</p>
         <MovieGrid movies={directorMovies} />
       </div>
-    </div>
+    </>
   );
 };

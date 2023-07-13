@@ -19,7 +19,7 @@ export const MovieGrid = ({
       ) : (
         filteredMovies.map((movie) => {
           return (
-            <div className="mb-3" key={movie.id}>
+            <div className="" key={movie.id}>
               <MovieCard movieData={movie} />
             </div>
           );

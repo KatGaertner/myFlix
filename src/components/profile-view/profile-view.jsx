@@ -6,6 +6,7 @@ import { API } from "../../utils/links";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData, logoutUser } from "../../redux/reducers/userData";
 import { deleteCookie } from "../../utils/cookies";
+import "./profile.scss";
 
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -95,7 +96,7 @@ export const ProfileView = () => {
     <>
       {!isEmpty(userData) && (
         <>
-          <h2 className="">Your profile </h2>
+          <h2>Your profile </h2>
           {!isOnEdit && (
             <>
               <ProfileShow handleToggle={handleToggle} />
@@ -110,7 +111,7 @@ export const ProfileView = () => {
               />
             </>
           )}
-          <h2>Your favorites</h2>
+          <h2 className="my-3">Your favorites</h2>
           <MovieGrid
             movies={movies.filter((movie) =>
               userData.data.favorites.includes(movie.id)

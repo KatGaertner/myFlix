@@ -1,0 +1,40 @@
+$bs-border-width: 1px;
+$row-height: 3rem;
+$col-height-left: 2rem;
+$col-height-right: 2.5rem;
+
+.button-container {
+  margin-bottom: 1rem;
+}
+
+.edit-left,
+.show-left {
+  height: $col-height-left;
+  margin-bottom: 0.2rem !important;
+}
+
+.edit-right,
+.show-right {
+  margin-bottom: 0.8rem;
+}
+
+.edit-row {
+  min-height: $row-height;
+}
+.edit-right {
+  height: calc($col-height-right + 2 * $bs-border-width);
+  padding-top: 0;
+  padding-left: 0;
+}
+
+.show-row {
+  min-height: calc($row-height + 2 * $bs-border-width);
+}
+.show-left {
+  padding: calc(0.375rem + $bs-border-width);
+}
+.show-right {
+  height: calc($col-height-right + 2 * $bs-border-width);
+  padding-top: calc(0.375rem + $bs-border-width);
+  padding-left: calc(2 * 0.75rem + $bs-border-width) !important;
+}

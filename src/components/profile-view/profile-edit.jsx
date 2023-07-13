@@ -40,27 +40,27 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
   return (
     <>
       <Form onSubmit={handleSubmit} noValidate>
-        <div className="d-flex mb-2">
+        <div className="d-flex button-container">
           <Button className="" onClick={handleToggle}>
             Exit
           </Button>
           <Button className="mx-2" type="submit">
-            Save Changes
+            Save
           </Button>
           <Button className="ms-auto btn-secondary" onClick={handleDelete}>
-            Delete Profile
+            Delete profile
           </Button>
         </div>
-        <Form.Group className="mb-1" as={Row}>
+        <Form.Group as={Row} className="edit-row">
           <Form.Label
             column
             sm={leftColumnWidth}
-            className="pe-5"
+            className="edit-left"
             htmlFor="newUsername"
           >
             New Username:
           </Form.Label>
-          <Col sm={rightColumnWidth}>
+          <Col sm={rightColumnWidth} className="edit-right">
             <Form.Control
               type="text"
               id="newUsername"
@@ -82,11 +82,16 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
           </Col>
           <Form.Control.Feedback></Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-1" as={Row}>
-          <Form.Label column sm={leftColumnWidth} htmlFor="newEmail">
+        <Form.Group as={Row} className="edit-row">
+          <Form.Label
+            column
+            sm={leftColumnWidth}
+            htmlFor="newEmail"
+            className="edit-left"
+          >
             New E-Mail:
           </Form.Label>
-          <Col sm={rightColumnWidth}>
+          <Col sm={rightColumnWidth} className="edit-right">
             <Form.Control
               type="email"
               id="newEmail"
@@ -96,11 +101,16 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
             />
           </Col>
         </Form.Group>
-        <Form.Group className="mb-1" as={Row}>
-          <Form.Label column sm={leftColumnWidth} htmlFor="newBirthday">
+        <Form.Group as={Row} className="edit-row">
+          <Form.Label
+            column
+            sm={leftColumnWidth}
+            htmlFor="newBirthday"
+            className="edit-left"
+          >
             New Birthday:
           </Form.Label>
-          <Col sm={rightColumnWidth}>
+          <Col sm={rightColumnWidth} className="edit-right">
             <Form.Control
               type="date"
               id="newBirthday"
@@ -110,11 +120,16 @@ export const ProfileEdit = ({ handleUpdate, handleDelete, handleToggle }) => {
             />
           </Col>
         </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Form.Label column sm={leftColumnWidth} htmlFor="newPassword">
+        <Form.Group as={Row} className="edit-row">
+          <Form.Label
+            column
+            sm={leftColumnWidth}
+            htmlFor="newPassword"
+            className="edit-left"
+          >
             New Password:
           </Form.Label>
-          <Col sm={rightColumnWidth}>
+          <Col sm={rightColumnWidth} className="edit-right">
             <PasswordField
               autocomplete={"new-password"}
               fieldID={"newPassword"}

@@ -12,7 +12,7 @@ export const MovieView = () => {
   const movieData = movies.find((movie) => movie.id === movieID);
 
   return (
-    <div className="p-4">
+    <>
       <Row>
         <Col sm={{ span: 4, order: "last" }}>
           <img className="w-100 d-none d-sm-block" src={movieData.imageURL} />
@@ -42,6 +42,6 @@ export const MovieView = () => {
       <div>
         <SimilarMovies movieID={movieID} />
       </div>
-    </div>
+    </>
   );
 };

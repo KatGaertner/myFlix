@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Form from "react-bootstrap/Form";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { setFilter } from "../../redux/reducers/movies";
 
 export const MoviesFilter = () => {
@@ -8,14 +8,25 @@ export const MoviesFilter = () => {
   const dispatch = useDispatch();
 
   return (
-    <Form.Control
-      type="text"
-      id="movies-filter"
-      aria-label="Filter movies"
-      placeholder="Filter movies..."
-      value={filter}
-      onChange={(e) => dispatch(setFilter(e.target.value))}
-      className="mx-5 w-50 bg-primary filterbar"
-    />
+    <InputGroup className="mx-md-5 mb-3 mb-md-0">
+      <Form.Control
+        type="text"
+        id="movies-filter"
+        aria-label="Start typing to filter movies"
+        placeholder="Start typing to filter movies..."
+        value={filter}
+        onChange={(e) => dispatch(setFilter(e.target.value))}
+        className="bg-primary filterbar"
+      />
+      <Button
+        variant="outline-secondary"
+        type="button"
+        onClick={(e) => dispatch(setFilter(""))}
+        className="reset-btn"
+        title="reset filter"
+      >
+        &times;
+      </Button>
+    </InputGroup>
   );
 };

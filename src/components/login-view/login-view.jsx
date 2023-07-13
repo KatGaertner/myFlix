@@ -48,7 +48,7 @@ export const LoginView = () => {
   };
 
   return (
-    <div className="p-4">
+    <>
       <h1 className="text-center">Log in</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Control
@@ -90,6 +90,6 @@ export const LoginView = () => {
       <Link to="/signup">
         <Button className="btn-secondary w-100 mt-3">Sign up</Button>
       </Link>
-    </div>
+    </>
   );
 };

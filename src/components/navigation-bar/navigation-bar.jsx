@@ -1,4 +1,4 @@
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Navbar, Nav, Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/reducers/userData";
@@ -13,63 +13,68 @@ export const NavigationBar = ({ isLoading }) => {
   return (
     <Navbar
       bg="primary"
-      expand="sm"
+      expand="md"
       sticky="top"
-      className="w-100 mb-4 bg-gradient"
+      className="navbar-light w-100 mb-4 bg-gradient"
+      variant="light"
     >
-      <Navbar.Brand as={Link} to="/" className="mx-3 icon-link">
-        <img
-          src={require("./logo.svg")}
-          alt="Logo"
-          width={"32px"}
-          height={"32px"}
-        />
+      <Container fluid className="py-1 px-3">
+        <Navbar.Brand as={Link} to="/" className="icon-link">
+          <img
+            src={require("./logo.svg")}
+            alt="Logo"
+            width={"32px"}
+            height={"32px"}
+          />
 
-        <span style={{ fontFamily: "'Comfortaa', cursive" }}>myFlix</span>
-      </Navbar.Brand>
-      {isLoading ? (
-        <></>
-      ) : (
-        <>
-          <Navbar.Toggle aria-controls="navbar" />
-          <Navbar.Collapse id="navbar">
-            <Nav className="w-100 d-flex align-items-baseline">
+          <span style={{ fontFamily: "'Comfortaa', cursive" }}>myFlix</span>
+        </Navbar.Brand>
+        {isLoading ? (
+          <></>
+        ) : (
+          <>
+            <Navbar.Toggle aria-controls="navbar" />
+            <Navbar.Collapse id="navbar">
               {!token ? (
-                <>
+                <Nav className="me-auto">
                   <Nav.Link as={Link} to="/login">
                     Log in
                   </Nav.Link>
                   <Nav.Link as={Link} to="/signup">
                     Sign up
                   </Nav.Link>
-                </>
+                </Nav>
               ) : (
                 <>
-                  <Nav.Link as={Link} to="/">
-                    Home
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/profile">
-                    Profile
-                  </Nav.Link>
-                  <MoviesFilter />
-                  <Button
-                    variant="outline-dark"
-                    className="btn mx-3 ms-auto"
-                    onClick={() => {
-                      dispatch(logoutUser());
-                      deleteCookie("token");
-                    }}
-                  >
-                    <span style={{ fontFamily: "'Comfortaa', cursive" }}>
-                      Logout
-                    </span>
-                  </Button>
+                  <Nav className="">
+                    <Nav.Link as={Link} to="/">
+                      Home
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/profile">
+                      Profile
+                    </Nav.Link>
+                  </Nav>
+                  <Form className="d-flex flex-column flex-md-row flex-fill align-items-top">
+                    <MoviesFilter />
+                    <Button
+                      variant="outline-dark"
+                      className="btn ms-auto"
+                      onClick={() => {
+                        dispatch(logoutUser());
+                        deleteCookie("token");
+                      }}
+                    >
+                      <span style={{ fontFamily: "'Comfortaa', cursive" }}>
+                        Logout
+                      </span>
+                    </Button>
+                  </Form>
                 </>
               )}
-            </Nav>
-          </Navbar.Collapse>
-        </>
-      )}
+            </Navbar.Collapse>
+          </>
+        )}
+      </Container>
     </Navbar>
   );
 };
