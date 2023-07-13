@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { API } from "../../utils/links";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { useSelector } from "react-redux";
+import { checkAuth } from "../../utils/fetchErrorHandlers";
 
 export const DirectorView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -20,6 +21,7 @@ export const DirectorView = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
+        checkAuth(response);
         return response.json();
       })
       .then((data) => {

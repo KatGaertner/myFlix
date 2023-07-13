@@ -16,6 +16,7 @@ import { API } from "../../utils/links";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { useState } from "react";
+import { checkAuth } from "../../utils/fetchErrorHandlers";
 
 export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -35,19 +36,9 @@ export const MainView = () => {
         },
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             return response.json();
-          } else {
-            let contentType = response.headers.get("content-type");
-            if (contentType.includes("text/html")) {
-              response.text().then((info) => alert(info));
-              throw "Error";
-            } else if (contentType.includes("application/json")) {
-              response.json().then((info) => {
-                alert(info.errors.map((e) => e.msg).join("\n"));
-              });
-              throw "Error";
-            }
           }
         })
         .then((data) => {
@@ -62,8 +53,6 @@ export const MainView = () => {
           console.error(error);
           setIsLoading(false);
         });
-    } else {
-      setIsLoading(false);
     }
   }, []);
 
@@ -77,7 +66,10 @@ export const MainView = () => {
     fetch(`${API}/movies`, {
       headers: { Authorization: `Bearer ${userData.token}` },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        checkAuth(response);
+        return response.json();
+      })
       .then((data) => {
         const moviesFromAPI = data.map((movie) => {
           return {

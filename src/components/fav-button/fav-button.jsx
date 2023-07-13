@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { API } from "../../utils/links";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserFavorites } from "../../redux/reducers/userData";
+import { checkAuth } from "../../utils/fetchErrorHandlers";
 
 export const FavButton = ({ movieID }) => {
   const userData = useSelector((state) => state.userData);
@@ -21,7 +22,10 @@ export const FavButton = ({ movieID }) => {
         method: "POST",
         headers: { Authorization: `Bearer ${userData.token}` },
       })
-        .then((response) => response.text())
+        .then((response) => {
+          checkAuth(response);
+          return response.text();
+        })
         .then((data) => {
           console.log(JSON.parse(data));
           dispatch(setUserFavorites(JSON.parse(data)));
@@ -33,7 +37,10 @@ export const FavButton = ({ movieID }) => {
         method: "DELETE",
         headers: { Authorization: `Bearer ${userData.token}` },
       })
-        .then((response) => response.text())
+        .then((response) => {
+          checkAuth(response);
+          return response.text();
+        })
         .then((data) => {
           console.log(JSON.parse(data));
           dispatch(setUserFavorites(JSON.parse(data)));

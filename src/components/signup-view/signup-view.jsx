@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
 import { useNavigate } from "react-router-dom";
+import { checkAuth, readErrors } from "../../utils/fetchErrorHandlers";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -33,18 +34,12 @@ export const SignupView = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             alert("Successfully signed up!");
             navigate("/login");
           } else {
-            let contentType = response.headers.get("content-type");
-            if (contentType.includes("text/html")) {
-              response.text().then((info) => alert(info));
-            } else if (contentType.includes("application/json")) {
-              response.json().then((info) => {
-                alert(info.errors.map((e) => e.msg).join("\n"));
-              });
-            }
+            readErrors(response);
           }
         })
         .catch((error) => {

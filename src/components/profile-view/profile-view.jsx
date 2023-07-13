@@ -6,6 +6,7 @@ import { API } from "../../utils/links";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData, logoutUser } from "../../redux/reducers/userData";
 import "./profile.scss";
+import { checkAuth, readErrors } from "../../utils/fetchErrorHandlers";
 
 export const ProfileView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -36,19 +37,11 @@ export const ProfileView = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             return response.json();
           } else {
-            let contentType = response.headers.get("content-type");
-            if (contentType.includes("text/html")) {
-              response.text().then((info) => alert(info));
-              throw "Error";
-            } else if (contentType.includes("application/json")) {
-              response.json().then((info) => {
-                alert(info.errors.map((e) => e.msg).join("\n"));
-              });
-              throw "Error";
-            }
+            readErrors(response);
           }
         })
         .then((data) => {
@@ -74,6 +67,7 @@ export const ProfileView = () => {
         },
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             return response.text();
           } else {
@@ -84,8 +78,9 @@ export const ProfileView = () => {
           alert(message);
           dispatch(logoutUser());
         })
-        .catch(() => {
+        .catch((error) => {
           alert("Something went wrong.");
+          console.error(error);
         });
     }
   };
