@@ -23,7 +23,7 @@ export const MoviesFilter = () => {
         type="button"
         onClick={(e) => dispatch(setFilter(""))}
         className="reset-btn"
-        title="reset filter"
+        title="Reset filter"
       >
         &times;
       </Button>
