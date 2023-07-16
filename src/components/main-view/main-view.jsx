@@ -60,6 +60,7 @@ export const MainView = () => {
   useEffect(() => {
     // only fetch list when token is there
     if (!userData.token) {
+      setIsLoading(false);
       return;
     }
 
