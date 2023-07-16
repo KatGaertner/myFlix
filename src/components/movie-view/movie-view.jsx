@@ -15,16 +15,16 @@ export const MovieView = () => {
     <>
       <Row>
         <Col sm={{ span: 4, order: "last" }}>
-          <img className="w-100 d-none d-sm-block" src={movieData.imageURL} />
+          <img className="w-100 movie-cover" src={movieData.imageURL} />
         </Col>
         <Col className="d-flex flex-column justify-content-between">
           <div>
-            <h1>{movieData.title}</h1>
-            <h2>
+            <h1 className="h2">{movieData.title}</h1>
+            <p className="h4">
               <Link to={`/directors/${movieData.directors[0].name}`}>
                 {movieData.directors[0].name}
               </Link>
-            </h2>
+            </p>
             <div>{movieData.summary}</div>
             <div className="text-end">
               <Link to={`/genres/${movieData.genres[0].name}`}>
