@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserFavorites } from "../../redux/reducers/userData";
 import { checkAuth } from "../../utils/fetchErrorHandlers";
 
-export const FavButton = ({ movieID }) => {
+export const FavButton = ({
+  movieID,
+  className = "p-1 position-absolute top-0 end-0",
+}) => {
   const userData = useSelector((state) => state.userData);
   const [isFavorited, setFavorited] = useState(false);
   const dispatch = useDispatch();
@@ -51,7 +54,7 @@ export const FavButton = ({ movieID }) => {
   return (
     <Button
       variant="link"
-      className="p-1 position-absolute top-0 end-0"
+      className={className}
       onClick={() => toggleFavorited()}
     >
       {!isFavorited && (
@@ -76,4 +79,5 @@ export const FavButton = ({ movieID }) => {
 
 FavButton.propTypes = {
   movieID: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };

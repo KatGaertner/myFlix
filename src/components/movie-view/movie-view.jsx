@@ -34,7 +34,7 @@ export const MovieView = () => {
           </div>
           <div className="d-flex flex-row justify-content-between">
             <BackButton />
-            <FavButton movieID={movieID} />
+            <FavButton movieID={movieID} className="p-1" />
           </div>
         </Col>
       </Row>
