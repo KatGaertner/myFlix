@@ -33,9 +33,13 @@ h3 {
 }
 
 .content-container {
-  @extend .rounded-4;
   @extend .bg-body;
   @extend .p-4;
+}
+@include media-breakpoint-up(sm) {
+  .content-container {
+    border-radius: 1rem;
+  }
 }
 
 .grid-container {
