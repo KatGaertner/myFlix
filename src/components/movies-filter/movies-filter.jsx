@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { setFilter } from "../../redux/reducers/movies";
@@ -7,8 +7,15 @@ export const MoviesFilter = () => {
   const filter = useSelector((state) => state.movies.filter);
   const dispatch = useDispatch();
 
+  // clean up when filter element is dismounted
+  useEffect(() => {
+    return () => {
+      dispatch(setFilter(""));
+    };
+  }, []);
+
   return (
-    <InputGroup className="mx-md-5 mb-3 mb-md-0">
+    <InputGroup className="filter-container">
       <Form.Control
         type="text"
         id="movies-filter"
@@ -16,10 +23,10 @@ export const MoviesFilter = () => {
         placeholder="Start typing to filter movies..."
         value={filter}
         onChange={(e) => dispatch(setFilter(e.target.value))}
-        className="bg-primary filterbar"
+        className="filterbar"
       />
       <Button
-        variant="outline-secondary"
+        variant="secondary"
         type="button"
         onClick={(e) => dispatch(setFilter(""))}
         className="reset-btn"

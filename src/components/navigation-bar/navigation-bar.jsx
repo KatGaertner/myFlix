@@ -2,7 +2,6 @@ import { Navbar, Nav, Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/reducers/userData";
-import { MoviesFilter } from "../movies-filter/movies-filter";
 import PropTypes from "prop-types";
 
 export const NavigationBar = ({ isLoading }) => {
@@ -54,7 +53,6 @@ export const NavigationBar = ({ isLoading }) => {
                     </Nav.Link>
                   </Nav>
                   <Form className="d-flex flex-column flex-md-row flex-fill align-items-top">
-                    <MoviesFilter />
                     <Button
                       variant="outline-dark"
                       className="btn ms-auto"

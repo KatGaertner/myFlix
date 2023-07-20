@@ -17,6 +17,7 @@ import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { useState } from "react";
 import { checkAuth } from "../../utils/fetchErrorHandlers";
+import { MoviesFilter } from "../movies-filter/movies-filter";
 
 export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -188,6 +189,7 @@ export const MainView = () => {
                       <NoDataInfo />
                     ) : (
                       <Col md={10} lg={8} className="content-container">
+                        <MoviesFilter />
                         <MovieGrid />
                       </Col>
                     )}
