@@ -12,8 +12,7 @@ export const NavigationBar = ({ isLoading }) => {
     <Navbar
       bg="primary"
       expand="md"
-      sticky="top"
-      className="navbar-light w-100 mb-4 bg-gradient"
+      className="navbar-light w-100 bg-gradient my-navbar fixed-top"
       variant="light"
     >
       <Container fluid className="py-1 px-3">
@@ -44,7 +43,7 @@ export const NavigationBar = ({ isLoading }) => {
                 </Nav>
               ) : (
                 <>
-                  <Nav className="">
+                  <Nav className="align-items-top">
                     <Nav.Link as={Link} to="/">
                       Home
                     </Nav.Link>

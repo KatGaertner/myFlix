@@ -82,3 +82,51 @@ input {
     margin-bottom: 1rem;
   }
 }
+
+//
+// everything below here is just to make the scrollbar behaviour make sense and look okay
+
+$navbar-padding: 8px;
+$navbar-content-height: 40px;
+$navbar-height: calc($navbar-content-height + 2 * $navbar-padding);
+
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  min-height: $navbar-height;
+  box-shadow: 0 0 5px $body-bg;
+  padding: $navbar-padding 0;
+  align-items: flex-start;
+}
+.navbar-toggler,
+.navbar-brand {
+  height: $navbar-content-height;
+}
+
+.bottom-container {
+  position: absolute;
+  top: $navbar-height;
+  height: calc(100vh - $navbar-height);
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  &::-webkit-scrollbar {
+    background: $body-bg !important;
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $tertiary !important;
+    border-radius: 5px;
+    box-shadow: 0 0 5px $body-bg;
+  }
+  @include media-breakpoint-up(sm) {
+    &::-webkit-scrollbar {
+      background: transparent !important;
+    }
+  }
+}

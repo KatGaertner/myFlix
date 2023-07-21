@@ -98,7 +98,7 @@ export const MainView = () => {
     <>
       <BrowserRouter>
         <NavigationBar isLoading={isLoading} />
-        <Row className="justify-content-center g-0 p-sm-4">
+        <Row className="justify-content-center g-0 p-sm-4 bottom-container">
           {isLoading ? (
             <LoadingInfo />
           ) : (
