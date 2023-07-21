@@ -112,7 +112,7 @@ $navbar-height: calc($navbar-content-height + 2 * $navbar-padding);
 html,
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -124,14 +124,14 @@ body {
 }
 .navbar-toggler,
 .navbar-brand {
-  height: $navbar-content-height;
+  min-height: $navbar-content-height;
 }
 
 #bottom-container {
   position: absolute;
   top: $navbar-height;
-  height: calc(100vh - $navbar-height);
-  width: 100%;
+  height: calc(100% - $navbar-height);
+  width: 100vw;
   overflow-y: scroll;
   scrollbar-gutter: stable both-edges;
 }
