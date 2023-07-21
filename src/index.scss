@@ -121,7 +121,7 @@ body {
   height: $navbar-content-height;
 }
 
-.bottom-container {
+#bottom-container {
   position: absolute;
   top: $navbar-height;
   height: calc(100vh - $navbar-height);

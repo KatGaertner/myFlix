@@ -18,6 +18,7 @@ import { GenreView } from "../genre-view/genre-view";
 import { useState } from "react";
 import { checkAuth } from "../../utils/fetchErrorHandlers";
 import { MoviesFilter } from "../movies-filter/movies-filter";
+import { ScrollToStart } from "./ScrollToStart";
 
 export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
@@ -97,8 +98,12 @@ export const MainView = () => {
   return (
     <>
       <BrowserRouter>
+        <ScrollToStart />
         <NavigationBar isLoading={isLoading} />
-        <Row className="justify-content-center g-0 p-sm-4 bottom-container">
+        <Row
+          className="justify-content-center g-0 p-sm-4"
+          id="bottom-container"
+        >
           {isLoading ? (
             <LoadingInfo />
           ) : (
