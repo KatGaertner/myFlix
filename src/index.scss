@@ -130,7 +130,7 @@ body {
 #bottom-container {
   position: absolute;
   top: $navbar-height;
-  height: calc(100vh - $navbar-height);
+  height: calc(100% - $navbar-height);
   width: 100vw;
   overflow-y: scroll;
   scrollbar-gutter: stable both-edges;
