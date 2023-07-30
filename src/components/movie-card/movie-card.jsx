@@ -6,7 +6,11 @@ import { FavButton } from "../fav-button/fav-button";
 export const MovieCard = ({ movieData }) => {
   return (
     <Card className="h-100 bg-primary text-dark">
-      <Card.Img variant="top" src={movieData.imageURL} />
+      <Card.Img
+        variant="top"
+        src={movieData.imageURL}
+        alt={`Movie poster for ${movieData.title}`}
+      />
       <Card.Body className="d-flex flex-column justify-content-between">
         <div>
           <Card.Title>{movieData.title}</Card.Title>

@@ -15,7 +15,11 @@ export const MovieView = () => {
     <>
       <Row>
         <Col sm={{ span: 4, order: "last" }}>
-          <img className="w-100 movie-cover" src={movieData.imageURL} />
+          <img
+            className="w-100 movie-cover"
+            src={movieData.imageURL}
+            alt={`Movie poster for ${movieData.title}`}
+          />
         </Col>
         <Col className="d-flex flex-column justify-content-between">
           <div>
