@@ -24,5 +24,5 @@ export const OutsideAlerter = (props) => {
 };
 
 OutsideAlerter.propTypes = {
-  props: PropTypes.object.isRequired,
+  props: PropTypes.object,
 };
