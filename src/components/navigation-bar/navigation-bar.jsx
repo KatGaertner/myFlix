@@ -15,7 +15,7 @@ export const NavigationBar = ({ isLoading }) => {
     <OutsideAlerter handleToggle={() => setExpanded(false)}>
       <Navbar
         bg="primary"
-        expand="md"
+        expand="sm"
         className="navbar-light w-100 bg-gradient my-navbar fixed-top"
         variant="light"
         expanded={expanded}
