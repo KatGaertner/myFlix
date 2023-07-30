@@ -1,63 +1,111 @@
-import PropTypes from "prop-types";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Navbar, Nav, Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/reducers/userData";
+import PropTypes from "prop-types";
+import { OutsideAlerter } from "./navbarWrapper";
+import { useState } from "react";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ isLoading }) => {
+  const token = useSelector((state) => state.userData.token);
+  const dispatch = useDispatch();
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <Navbar
-      bg="primary"
-      expand="sm"
-      sticky="top"
-      className="w-100 mb-4 bg-gradient"
-    >
-      <Navbar.Brand as={Link} to="/" className="mx-3 icon-link">
-        <img
-          src={require("./logo.svg")}
-          alt="Logo"
-          width={"32px"}
-          height={"32px"}
-        />
+    <OutsideAlerter handleToggle={() => setExpanded(false)}>
+      <Navbar
+        bg="primary"
+        expand="md"
+        className="navbar-light w-100 bg-gradient my-navbar fixed-top"
+        variant="light"
+        expanded={expanded}
+      >
+        <Container fluid className="px-3">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="icon-link"
+            onClick={() => setExpanded(false)}
+          >
+            <img
+              src={require("./logo.svg")}
+              alt="Logo"
+              width={"32px"}
+              height={"32px"}
+            />
 
-        <span style={{ fontFamily: "'Comfortaa', cursive" }}>myFlix</span>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbar" />
-      <Navbar.Collapse id="navbar">
-        <Nav className="w-100 d-flex align-items-baseline">
-          {!user ? (
-            <>
-              <Nav.Link as={Link} to="/login">
-                Log in
-              </Nav.Link>
-              <Nav.Link as={Link} to="/signup">
-                Sign up
-              </Nav.Link>
-            </>
+            <span style={{ fontFamily: "'Comfortaa', cursive" }}>myFlix</span>
+          </Navbar.Brand>
+          {isLoading ? (
+            <></>
           ) : (
             <>
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to="/profile">
-                Profile
-              </Nav.Link>
-              <Button
-                variant="outline-dark"
-                className="btn mx-3 ms-auto"
-                onClick={onLoggedOut}
-              >
-                <span style={{ fontFamily: "'Comfortaa', cursive" }}>
-                  Logout
-                </span>
-              </Button>
+              <Navbar.Toggle
+                aria-controls="navbarCollapse"
+                id="navbar-toggler"
+                onClick={() => setExpanded(expanded ? false : true)}
+              />
+              <Navbar.Collapse id="navbarCollapse">
+                {!token ? (
+                  <Nav className="me-auto">
+                    <Nav.Link
+                      as={Link}
+                      to="/login"
+                      onClick={() => setExpanded(false)}
+                    >
+                      Log in
+                    </Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/signup"
+                      onClick={() => setExpanded(false)}
+                    >
+                      Sign up
+                    </Nav.Link>
+                  </Nav>
+                ) : (
+                  <>
+                    <Nav className="align-items-top">
+                      <Nav.Link
+                        as={Link}
+                        to="/"
+                        onClick={() => setExpanded(false)}
+                      >
+                        Home
+                      </Nav.Link>
+                      <Nav.Link
+                        as={Link}
+                        to="/profile"
+                        onClick={() => setExpanded(false)}
+                      >
+                        Profile
+                      </Nav.Link>
+                    </Nav>
+                    <Form className="d-flex flex-column flex-md-row flex-fill align-items-top">
+                      <Button
+                        variant="outline-dark"
+                        className="btn ms-auto"
+                        onClick={() => {
+                          setExpanded(false);
+                          dispatch(logoutUser());
+                        }}
+                      >
+                        <span style={{ fontFamily: "'Comfortaa', cursive" }}>
+                          Logout
+                        </span>
+                      </Button>
+                    </Form>
+                  </>
+                )}
+              </Navbar.Collapse>
             </>
           )}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+        </Container>
+      </Navbar>
+    </OutsideAlerter>
   );
 };
 
 NavigationBar.propTypes = {
-  user: PropTypes.bool.isRequired,
-  onLoggedOut: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };

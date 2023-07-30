@@ -2,39 +2,49 @@ import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API } from "../../utils/links";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserFavorites } from "../../redux/reducers/userData";
+import { checkAuth } from "../../utils/fetchErrorHandlers";
 
-export const FavButton = ({ movieID }) => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const token = localStorage.getItem("token");
+export const FavButton = ({
+  movieID,
+  className = "p-1 position-absolute top-0 end-0",
+}) => {
+  const userData = useSelector((state) => state.userData);
   const [isFavorited, setFavorited] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const isFavoriteMovie = userData.favorites.includes(movieID);
+    const isFavoriteMovie = userData.data.favorites.includes(movieID);
     setFavorited(isFavoriteMovie);
   }, [movieID]);
 
   const toggleFavorited = () => {
     if (!isFavorited) {
-      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData.data._id}/movies/${movieID}`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       })
-        .then((response) => response.text())
+        .then((response) => {
+          checkAuth(response);
+          return response.text();
+        })
         .then((data) => {
-          userData.favorites = JSON.parse(data);
-          localStorage.setItem("userData", JSON.stringify(userData));
+          dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(true);
         })
         .catch((error) => console.error(error));
     } else if (isFavorited) {
-      fetch(`${API}/users/${userData._id}/movies/${movieID}`, {
+      fetch(`${API}/users/${userData.data._id}/movies/${movieID}`, {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       })
-        .then((response) => response.text())
+        .then((response) => {
+          checkAuth(response);
+          return response.text();
+        })
         .then((data) => {
-          userData.favorites = JSON.parse(data);
-          localStorage.setItem("userData", JSON.stringify(userData));
+          dispatch(setUserFavorites(JSON.parse(data)));
           setFavorited(false);
         })
         .catch((error) => console.error(error));
@@ -42,7 +52,11 @@ export const FavButton = ({ movieID }) => {
   };
 
   return (
-    <Button variant="link" className="p-0" onClick={() => toggleFavorited()}>
+    <Button
+      variant="link"
+      className={className}
+      onClick={() => toggleFavorited()}
+    >
       {!isFavorited && (
         <img
           src={require("./fav-false.svg")}
@@ -65,4 +79,5 @@ export const FavButton = ({ movieID }) => {
 
 FavButton.propTypes = {
   movieID: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };

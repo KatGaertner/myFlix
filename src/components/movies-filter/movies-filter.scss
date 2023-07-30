@@ -1,0 +1,17 @@
+.filterbar {
+  border-color: var(--bs-primary);
+}
+.reset-btn {
+  font-size: 16pt;
+  line-height: 10%;
+}
+
+.filter-container {
+  padding: 0rem 0rem 3rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .filter-container {
+    padding: 1rem 4rem 6rem;
+  }
+}

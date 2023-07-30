@@ -1,13 +1,20 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/reducers/userData";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
+  const dispatch = useDispatch();
+
+  const handleCheck = () => {
+    setRememberMe(!rememberMe);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault(); // because default is reloading the entire page
@@ -25,9 +32,10 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.userData) {
-          localStorage.setItem("userData", JSON.stringify(data.userData));
-          localStorage.setItem("token", data.token);
-          onLoggedIn(data.userData, data.token);
+          dispatch(loginUser(data));
+          if (rememberMe) {
+            localStorage.setItem("token", data.token);
+          }
         } else {
           alert(data.info.message);
         }
@@ -39,7 +47,7 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <div className="p-4">
+    <>
       <h1 className="text-center">Log in</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Control
@@ -54,7 +62,7 @@ export const LoginView = ({ onLoggedIn }) => {
         />
         <PasswordField
           className={"mb-2"}
-          fieldID={"newPassword"}
+          fieldID={"Password"}
           fieldPlaceholder={"Password"}
           fieldValue={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -66,7 +74,8 @@ export const LoginView = ({ onLoggedIn }) => {
           type="checkbox"
           id="keepLogInCheck"
           label="Keep me logged in"
-          defaultChecked={true}
+          checked={rememberMe}
+          onChange={handleCheck}
         />
         <Button className="mb-3 w-100" type="submit">
           Log in
@@ -80,10 +89,6 @@ export const LoginView = ({ onLoggedIn }) => {
       <Link to="/signup">
         <Button className="btn-secondary w-100 mt-3">Sign up</Button>
       </Link>
-    </div>
+    </>
   );
-};
-
-LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
 };

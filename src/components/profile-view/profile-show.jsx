@@ -1,8 +1,11 @@
 import { Col, Row, Button } from "react-bootstrap";
 import { leftColumnWidth, rightColumnWidth } from "./layout";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
-export const ProfileShow = ({ userData, handleToggle }) => {
+export const ProfileShow = ({ handleToggle }) => {
+  const userData = useSelector((state) => state.userData.data);
+
   const showBirthday = (datafield) => {
     if (datafield) {
       // the date has to be parsed as UTC, otherwise it might get pushed around based on local timezones
@@ -13,45 +16,50 @@ export const ProfileShow = ({ userData, handleToggle }) => {
       });
       return dateFormatter.format(new Date(datafield));
     } else {
-      return <i>not set</i>;
+      return "";
     }
   };
 
   return (
     <>
-      <div className="d-flex mb-2">
-        <Button className="mb-2" variant="primary" onClick={handleToggle}>
+      <div className="d-flex button-container">
+        <Button className="" variant="primary" onClick={handleToggle}>
           Edit
         </Button>
       </div>
-      <Row className="my-3">
-        <Col sm={leftColumnWidth} className="">
+
+      <Row className="show-row">
+        <Col sm={leftColumnWidth} className="show-left">
           Username:
         </Col>
-        <Col sm={rightColumnWidth}>{userData.name}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {userData.name}
+        </Col>
       </Row>
-      <Row className="my-3">
-        <Col sm={leftColumnWidth} className="">
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left">
           E-Mail:
         </Col>
-        <Col sm={rightColumnWidth}>{userData.email}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {userData.email}
+        </Col>
       </Row>
-      <Row className="my-3">
-        <Col sm={leftColumnWidth} className="">
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left">
           Birthday:
         </Col>
-        <Col sm={rightColumnWidth}>{showBirthday(userData.birthday)}</Col>
+        <Col sm={rightColumnWidth} className="show-right">
+          {showBirthday(userData.birthday)}
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={leftColumnWidth} className="show-left" />
+        <Col sm={rightColumnWidth} className="show-right" />
       </Row>
     </>
   );
 };
 
 ProfileShow.propTypes = {
-  userData: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string,
-    favorites: PropTypes.arrayOf(PropTypes.string),
-  }),
+  handleToggle: PropTypes.func.isRequired,
 };

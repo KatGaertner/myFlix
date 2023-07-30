@@ -1,23 +1,18 @@
-import { moviesType } from "../../utils/types";
-import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MovieGrid } from "../movie-grid/movie-grid";
 import { ProfileShow } from "./profile-show";
 import { ProfileEdit } from "./profile-edit";
 import { API } from "../../utils/links";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData, logoutUser } from "../../redux/reducers/userData";
+import "./profile.scss";
+import { checkAuth, readErrors } from "../../utils/fetchErrorHandlers";
 
-export const ProfileView = ({ movies, onLoggedOut }) => {
+export const ProfileView = () => {
+  const movies = useSelector((state) => state.movies.list);
   const [isOnEdit, setOnEdit] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    let storedUser = JSON.parse(localStorage.getItem("userData"));
-    setUserData(storedUser);
-    let storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  }, []);
+  const userData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
 
   const isEmpty = (obj) => {
     if (Object.keys(obj).length === 0 && obj.constructor === Object) {
@@ -33,33 +28,24 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
 
   const handleUpdate = (data) => {
     if (!isEmpty(data)) {
-      fetch(`${API}/users/${userData._id}`, {
+      fetch(`${API}/users/${userData.data._id}`, {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             return response.json();
           } else {
-            let contentType = response.headers.get("content-type");
-            if (contentType.includes("text/html")) {
-              response.text().then((info) => alert(info));
-              throw "Error";
-            } else if (contentType.includes("application/json")) {
-              response.json().then((info) => {
-                alert(info.errors.map((e) => e.msg).join("\n"));
-              });
-              throw "Error";
-            }
+            readErrors(response);
           }
         })
         .then((data) => {
-          setUserData(data);
-          localStorage.setItem("userData", JSON.stringify(data));
+          dispatch(setUserData(data));
           handleToggle();
         })
         .catch((error) => {
@@ -73,14 +59,15 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
     let response = confirm("Are you sure you want to delete your profile?");
 
     if (response) {
-      fetch(`${API}/users/${userData._id}`, {
+      fetch(`${API}/users/${userData.data._id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
           "Content-Type": "application/json",
         },
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             return response.text();
           } else {
@@ -89,10 +76,11 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
         })
         .then((message) => {
           alert(message);
-          onLoggedOut();
+          dispatch(logoutUser());
         })
-        .catch(() => {
+        .catch((error) => {
           alert("Something went wrong.");
+          console.error(error);
         });
     }
   };
@@ -101,35 +89,29 @@ export const ProfileView = ({ movies, onLoggedOut }) => {
     <>
       {!isEmpty(userData) && (
         <>
-          <h2 className="">Your profile </h2>
+          <h2>Your profile </h2>
           {!isOnEdit && (
             <>
-              <ProfileShow userData={userData} handleToggle={handleToggle} />
+              <ProfileShow handleToggle={handleToggle} />
             </>
           )}
           {isOnEdit && (
             <>
               <ProfileEdit
-                userData={userData}
                 handleUpdate={handleUpdate}
                 handleDelete={handleDelete}
                 handleToggle={handleToggle}
               />
             </>
           )}
-          <h2>Your favorites</h2>
+          <h2 className="my-3">Your favorites</h2>
           <MovieGrid
             movies={movies.filter((movie) =>
-              userData.favorites.includes(movie.id)
+              userData.data.favorites.includes(movie.id)
             )}
           />
         </>
       )}
     </>
   );
-};
-
-ProfileView.propTypes = {
-  movies: moviesType.isRequired,
-  onLoggedOut: PropTypes.func.isRequired,
 };

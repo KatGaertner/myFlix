@@ -3,12 +3,15 @@ import { Col, Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PasswordField } from "../password-field/password-field";
 import { API } from "../../utils/links";
+import { useNavigate } from "react-router-dom";
+import { checkAuth, readErrors } from "../../utils/fetchErrorHandlers";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const navigate = useNavigate();
 
   // layout
   const leftColumnWidth = 4;
@@ -31,17 +34,12 @@ export const SignupView = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
+          checkAuth(response);
           if (response.ok) {
             alert("Successfully signed up!");
+            navigate("/login");
           } else {
-            let contentType = response.headers.get("content-type");
-            if (contentType.includes("text/html")) {
-              response.text().then((info) => alert(info));
-            } else if (contentType.includes("application/json")) {
-              response.json().then((info) => {
-                alert(info.errors.map((e) => e.msg).join("\n"));
-              });
-            }
+            readErrors(response);
           }
         })
         .catch((error) => {
@@ -52,7 +50,7 @@ export const SignupView = () => {
   };
 
   return (
-    <div className="p-4">
+    <>
       <h1 className="text-center">Sign up</h1>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3" as={Row}>
@@ -62,7 +60,7 @@ export const SignupView = () => {
             className="pe-5"
             htmlFor="username"
           >
-            Username:*
+            Username: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <Form.Control
@@ -96,7 +94,7 @@ export const SignupView = () => {
         </Form.Group>
         <Form.Group className="mb-3" as={Row}>
           <Form.Label column sm={leftColumnWidth} htmlFor="email">
-            E-Mail:*
+            E-Mail: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <Form.Control
@@ -125,7 +123,7 @@ export const SignupView = () => {
         </Form.Group>
         <Form.Group className="mb-3" as={Row}>
           <Form.Label column sm={leftColumnWidth} htmlFor="password">
-            Password:*
+            Password: *
           </Form.Label>
           <Col sm={rightColumnWidth}>
             <PasswordField
@@ -155,6 +153,6 @@ export const SignupView = () => {
       <Link to="/login">
         <Button className="btn-secondary w-100 mt-3">Log in</Button>
       </Link>
-    </div>
+    </>
   );
 };
