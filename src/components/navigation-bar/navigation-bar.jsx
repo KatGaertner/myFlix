@@ -4,29 +4,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/reducers/userData";
 import PropTypes from "prop-types";
 import { OutsideAlerter } from "./navbarWrapper";
+import { useState } from "react";
 
 export const NavigationBar = ({ isLoading }) => {
   const token = useSelector((state) => state.userData.token);
   const dispatch = useDispatch();
-
-  const handleToggle = () => {
-    if (
-      !document.getElementById("navbar-toggler").classList.contains("collapsed")
-    ) {
-      document.getElementById("navbar-toggler").click();
-    }
-  };
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <OutsideAlerter handleToggle={handleToggle}>
+    <OutsideAlerter handleToggle={() => setExpanded(false)}>
       <Navbar
         bg="primary"
         expand="md"
         className="navbar-light w-100 bg-gradient my-navbar fixed-top"
         variant="light"
+        expanded={expanded}
       >
         <Container fluid className="px-3">
-          <Navbar.Brand as={Link} to="/" className="icon-link">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="icon-link"
+            onClick={() => setExpanded(false)}
+          >
             <img
               src={require("./logo.svg")}
               alt="Logo"
@@ -43,24 +43,41 @@ export const NavigationBar = ({ isLoading }) => {
               <Navbar.Toggle
                 aria-controls="navbarCollapse"
                 id="navbar-toggler"
+                onClick={() => setExpanded(expanded ? false : true)}
               />
               <Navbar.Collapse id="navbarCollapse">
                 {!token ? (
                   <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/login" onClick={handleToggle}>
+                    <Nav.Link
+                      as={Link}
+                      to="/login"
+                      onClick={() => setExpanded(false)}
+                    >
                       Log in
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/signup" onClick={handleToggle}>
+                    <Nav.Link
+                      as={Link}
+                      to="/signup"
+                      onClick={() => setExpanded(false)}
+                    >
                       Sign up
                     </Nav.Link>
                   </Nav>
                 ) : (
                   <>
                     <Nav className="align-items-top">
-                      <Nav.Link as={Link} to="/" onClick={handleToggle}>
+                      <Nav.Link
+                        as={Link}
+                        to="/"
+                        onClick={() => setExpanded(false)}
+                      >
                         Home
                       </Nav.Link>
-                      <Nav.Link as={Link} to="/profile" onClick={handleToggle}>
+                      <Nav.Link
+                        as={Link}
+                        to="/profile"
+                        onClick={() => setExpanded(false)}
+                      >
                         Profile
                       </Nav.Link>
                     </Nav>
@@ -69,7 +86,7 @@ export const NavigationBar = ({ isLoading }) => {
                         variant="outline-dark"
                         className="btn ms-auto"
                         onClick={() => {
-                          handleToggle();
+                          setExpanded(false);
                           dispatch(logoutUser());
                         }}
                       >
