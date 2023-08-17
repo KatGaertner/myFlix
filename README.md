@@ -24,6 +24,7 @@ This project utilizes:
 - Redux: Implemented for robust state management.
 - Parcel: Utilized as the build tool.
 
+<a name="webpage-cut"></a>
 ## Installation and Setup
 
 To run the app locally, follow these steps:
