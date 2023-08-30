@@ -15,6 +15,15 @@ The app is currently [deployed on Netlify](https://myflix-27.netlify.app/).
 - **Favorites List:** Users can curate their own favorites list by adding and removing movies at their convenience.
 - **User Account Management:** Users have the flexibility to update their account information or choose to delete their account if desired.
 
+## Screenshots
+
+<a href="https://github.com/KatGaertner/myFlix/blob/main/screenshots/desktop1.png">
+<img src="https://github.com/KatGaertner/myFlix/blob/main/screenshots/desktop1.png?raw=true" alt="Desktop screenshot" height="200px"/></a>
+<a href="https://github.com/KatGaertner/myFlix/blob/main/screenshots/mobile1.jpeg">
+<img src="https://github.com/KatGaertner/myFlix/blob/main/screenshots/mobile1.jpeg?raw=true" alt="Mobile screenshot" height="200px"/></a>
+<a href="https://github.com/KatGaertner/myFlix/blob/main/screenshots/mobile2.jpeg">
+<img src="https://github.com/KatGaertner/myFlix/blob/main/screenshots/mobile2.jpeg?raw=true" alt="Mobile screenshot" height="200px"/></a>
+
 ## Technologies
 
 This project utilizes:
@@ -25,6 +34,7 @@ This project utilizes:
 - Parcel: Utilized as the build tool.
 
 <a name="webpage-cut"></a>
+
 ## Installation and Setup
 
 To run the app locally, follow these steps:
